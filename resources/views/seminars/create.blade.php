@@ -1,0 +1,125 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+    
+<div class="row">
+    <div class="col-10"><h1>Насрочване на занимания</h1></div>
+</div>
+<form action="{{route('seminars.store')}}" method="POST" enctype="multipart/form-data">
+    @csrf
+    <div class="row mt-3">
+        <div class="col-md-5 col-8">
+            <label for="seminar_name">Име на модула:</label>
+            <input type="text" name="seminar_name" id="seminar_name" class="form-control form-control-sm"> 
+        </div>
+        <div class="col-md-2 col-4">
+            <label for="seminar_name">Код:</label>
+            <input type="text" name="seminar_code" id="seminar_code" class="form-control form-control-sm"> 
+        </div> 
+        <div class="col-md-2 col-8">
+            <label for="seminar_type">Вид заетост:</label>
+            <select type="text" name="seminar_type" id="academic" class="form-select form-select-sm">
+                <option value="" class="" disabled selected>вид на заетостта...</option>
+                @foreach (config('enums.seminar_types') as $seminar_type)
+                    <option value="{{$loop->iteration}}">{{$seminar_type}}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-2 col-5">
+            <div class="row border">
+                <div class="col-12 text-center">
+                <strong>Час\Ден</strong>
+                </div>
+            </div>
+            @foreach (config('enums.class_periods') as $period)
+                <div class="row border border-top-0">
+                    <div class="col-12 text-center">
+                        <strong>{{$period}}</strong>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+        @foreach (config('enums.weekdays') as $weekday)
+        @if ($loop->first==false)
+            <div class="col-md-1 col-1">
+                <div class="row border border-start-0"> 
+                    <div class="col-12 text-center ps-1">               
+                        <strong>{{$weekday}}</strong>
+                    </div>
+                </div>
+                @for ($day_period = 1; $day_period < count(config('enums.class_periods'))+1; $day_period++)
+                    <div class="row border-bottom border-end">
+                        <div class="col-12 text-center">
+                            <input class="form-check-input" type="checkbox" name="classes[{{$loop->iteration-1}}][]" value="{{$day_period}}" id="flexCheckDefault{{$loop->iteration-1}}-{{$day_period}}">
+                        </div>
+                    </div>
+                @endfor
+            </div>
+        @endif
+        @if ($loop->last)
+            <div class="col-md-1 col-1">
+                <div class="row border border-start-0"> 
+                    <div class="col-12 text-center ps-1">               
+                        <strong>{{config('enums.weekdays')[0]}}</strong>
+                    </div>
+                </div>
+                @for ($sunday_period = 1; $sunday_period < count(config('enums.class_periods'))+1; $sunday_period++)
+                    <div class="row border-bottom border-end">
+                        <div class="col-12 text-center">
+                            <input class="form-check-input" type="checkbox" name="classes[0][]" value="{{$sunday_period}}" id="flexCheckDefault0-{{$sunday_period}}">
+                        </div>
+                    </div>
+                @endfor
+            </div>
+        @endif   
+        @endforeach   
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-4">
+            <label for="date_start">Начална дата:</label>
+            <input type="date" name="date_start" id="date_start" class="form-control form-control-sm">
+        </div>
+        <div class="col-md-4 offset-md-1">
+            <label for="date_end">Крайна дата:</label>
+            <input type="date" name="date_end" id="date_end" class="form-control form-control-sm">
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-4 col-8">
+            <label for="academic">Преподавател:</label>
+            <select type="text" name="academic" id="academic" class="form-select form-select-sm">
+                <option value="" class="" disabled selected>изберете преподавател</option>
+                @foreach ($academics as $academic)
+                    <option value="{{$academic->id}}">{{config('enums.acad_positions')[$academic->acad_position].' '.$academic->first_name.' '.$academic->last_name.', '.config('enums.acad_titles')[$academic->acad_title]}}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label for="group">Група:</label>
+            <select type="text" name="group" id="group" class="form-select form-select-sm">
+                <option value="" class="" disabled selected>изберете група</option>
+                @foreach ($groups as $group)
+                    <option value="{{$group->id}}">{{$group->name}}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label for="room">Зала:</label>
+            <select type="text" name="room" id="room" class="form-select form-select-sm">
+                <option value="" class="" disabled selected>изберете зала</option>
+                @foreach ($rooms as $room)
+                    <option value="{{$room->id}}">{{$room->room_name}}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+        <button type="submit" class="btn btn-success btn-sm mt-3">
+            Запиши
+        </button>
+    
+</form>  
+</div>  
+@endsection
