@@ -16,6 +16,8 @@ class SubjectController extends Controller
     public function index()
     {
         //
+        $academics = Academic::orderBy('id')->paginate(15);
+        return view('academics.index', ['academics'=>$academics]);
     }
 
     /**
@@ -26,6 +28,7 @@ class SubjectController extends Controller
     public function create()
     {
         //
+        return view('subjects.create');
     }
 
     /**

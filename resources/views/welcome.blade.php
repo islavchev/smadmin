@@ -52,20 +52,22 @@
                         $seminars_count = 0;
                     @endphp
                     <div class="col">
-                @foreach ($seminars->sortBy('seminar_period')->sortBy('seminar_date') as $seminar)
-                    @if ($seminar->seminar_date == $weekday && $seminar->seminar_period == $period)
-                        <div class="row {{$seminars_count>0 ? 'border-top':''}}" style="font-size:0.7rem">
-                            <div class="col p-0">{{$seminar->seminar_code}}</div>
-                            <div class="col p-0"><a href="{{route('academics.show', $seminar->academic)}}">{{$seminar->academic->abbreviation}}</a></div> 
-                            <div class="col p-0"><a href="{{route('rooms.show', $seminar->room)}}">{{$seminar->room->room_name}}</a></div>
-                            <div class="col p-0">{{$seminar->student_group->name}}</div>
-                        </div>
-                        @php
-                            $seminars_count++;
-                        @endphp
-                    @endif
-                @endforeach
-            </div>
+                        @if ($seminars)
+                            @foreach ($seminars->sortBy('seminar_period')->sortBy('seminar_date') as $seminar)
+                            @if ($seminar->seminar_date == $weekday && $seminar->seminar_period == $period)
+                                <div class="row {{$seminars_count>0 ? 'border-top':''}}" style="font-size:0.7rem">
+                                    <div class="col p-0">{{$seminar->seminar_code}}</div>
+                                    <div class="col p-0"><a href="{{route('academics.show', $seminar->academic)}}">{{$seminar->academic->abbreviation}}</a></div> 
+                                    <div class="col p-0"><a href="{{route('rooms.show', $seminar->room)}}">{{$seminar->room->room_name}}</a></div>
+                                    <div class="col p-0">{{$seminar->student_group->name}}</div>
+                                </div>
+                                @php
+                                    $seminars_count++;
+                                @endphp
+                            @endif
+                            @endforeach
+                        @endif               
+                    </div>
                 </div>
             @endforeach
         </div>

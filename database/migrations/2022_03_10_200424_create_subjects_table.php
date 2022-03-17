@@ -21,6 +21,7 @@ class CreateSubjectsTable extends Migration
             $table->integer('ects');
             $table->text('note');
             $table->string('code',6);
+            $table->smallInteger('type');
             $table->timestamps();
         });
     }

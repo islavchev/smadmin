@@ -7,6 +7,7 @@ use App\Http\Controllers\AcademicController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\StudentGroupController;
 use App\Http\Controllers\SeminarController;
+use App\Http\Controllers\SubjectController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,3 +34,4 @@ Route::resource('rooms', RoomController::class);
 Route::resource('student_groups', StudentGroupController::class);
 Route::resource('academics', AcademicController::class);
 Route::resource('seminars', SeminarController::class);
+Route::resource('subjects', SubjectController::class);

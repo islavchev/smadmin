@@ -16,8 +16,11 @@ class IndexController extends Controller
             $week_array[] = date('Y-m-d', strtotime("this week + $i day", strtotime($today)));
             $weekday_array[] = date('w', strtotime("this week + $i day", strtotime($today)));
         }
-
-        $seminars = Seminar::where('seminar_date', '>=', $week_array[0])->where('seminar_date', '<=', $week_array[5])->get();
+        if (Seminar::first()!=null) {
+            $seminars = Seminar::where('seminar_date', '>=', $week_array[0])->where('seminar_date', '<=', $week_array[5])->get();
+        } else {
+            $seminars = 0;
+        }
 
         // dd($seminars[1]->student_group);
 
