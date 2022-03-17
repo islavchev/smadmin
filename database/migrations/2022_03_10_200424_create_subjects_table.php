@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 class CreateSubjectsTable extends Migration
 {
@@ -15,6 +15,12 @@ class CreateSubjectsTable extends Migration
     {
         Schema::create('subjects', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->integer('lecture_hours');
+            $table->integer('seminar_hours');
+            $table->integer('ects');
+            $table->text('note');
+            $table->string('code',6);
             $table->timestamps();
         });
     }

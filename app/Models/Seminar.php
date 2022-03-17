@@ -23,4 +23,8 @@ class Seminar extends Model
     public function academic(){
         return $this->belongsTo(Academic::class);
     }
+
+    public function subject(){
+        return $this->belongsTo(Subject::class);
+    }
 }
