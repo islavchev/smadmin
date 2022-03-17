@@ -16,8 +16,8 @@ class SubjectController extends Controller
     public function index()
     {
         //
-        $academics = Academic::orderBy('id')->paginate(15);
-        return view('academics.index', ['academics'=>$academics]);
+        $subjects = Subject::orderBy('id')->paginate(15);
+        return view('subjects.index', ['subjects'=>$subjects]);
     }
 
     /**
