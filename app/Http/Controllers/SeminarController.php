@@ -126,8 +126,23 @@ class SeminarController extends Controller
      * @param  \App\Models\Seminar  $seminar
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Seminar $seminar)
+    public function destroy(UpdateSeminarRequest $request)
     {
         //
+        foreach ($request->seminar_ids as $seminar_id) {
+            Seminar::get($seminar_id) -> delete(); 
+        }
+        // $seminar -> delete();
+
+        return redirect()->route('seminars.index');
+    }
+
+    public function destroyMultiple(Seminar $seminar)
+    {
+        //
+
+        $seminar -> delete();
+
+        return redirect()->route('seminars.index');
     }
 }

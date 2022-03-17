@@ -19,17 +19,24 @@
     </div> --}}
 
     <div class="row">
-        <a href="{{route('rooms.index')}}" class="btn btn-outline-secondary col-sm-2 col-md-1 me-2">Зали</a>
-        <a href="{{route('student_groups.index')}}" class="btn btn-outline-secondary col-sm-2 col-md-1 me-2">Групи</a>        
-        <a href="{{route('academics.index')}}" class="btn btn-outline-secondary col-sm-3 col-md-3 col-lg-2 me-2">Преподаватели</a>
-        <a href="{{route('seminars.create')}}" class="btn btn-outline-success col-sm-1 ms-auto pb-0"><span class="material-icons">more_time</span></a>
-        <a href="{{route('seminars.index')}}" class="btn btn-outline-warning col-sm-1 ms-2 pb-0"><span class="material-icons">pending_actions</span></a>
+        <div class="col-sm-2 col-md-2 my-1"><a href="{{route('rooms.index')}}" class="btn btn-outline-secondary w-100">Зали</a></div>
+        <div class="col-sm-2 col-md-2 my-1"><a href="{{route('student_groups.index')}}" class="btn btn-outline-secondary w-100">Групи</a></div>     
+        <div class="col-sm-4 col-md-3 col-lg-2 my-1"><a href="{{route('academics.index')}}" class="btn btn-outline-secondary w-100">Преподаватели</a></div>
+        <div class="col-sm-2 col-lg-1 ms-auto my-1"><a href="{{route('seminars.create')}}" class="btn btn-outline-success w-100 py-1 pb-0"><span class="material-icons">more_time</span></a></div>
+        <div class="col-sm-2 col-lg-1 my-1"><a href="{{route('seminars.index')}}" class="btn btn-outline-warning w-100 py-1 pb-0"><span class="material-icons">pending_actions</span></a></div>
     </div>
     <div class="row">
         <div class="col-lg-1 col-md-3 col-sm-12 mt-3 border border-secondary h-auto" style="background-color:lightgray">
             <div class="row text-center"><strong>Period</strong></div>
             @foreach ( config('enums.class_periods') as $key => $class_period)
-                <div class="row border-top border-secondary text-center Row{{$loop -> iteration}} align-items-center"><strong>{{ $class_period }}</strong></div>
+                <div class="row border-top border-secondary text-center Row{{$loop -> iteration}} align-items-center">
+                    <div class="col-1 d-block d-md-none">
+                        {{$loop->iteration}}
+                    </div>
+                    <div class="col">
+                    <strong>{{ $class_period }}</strong>
+                    </div>
+                </div>
             @endforeach
         </div>
         @foreach ($week_array as $weekday)
