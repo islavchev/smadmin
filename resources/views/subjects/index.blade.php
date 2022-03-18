@@ -14,13 +14,27 @@
                 {{-- @endif --}}
             </div>
         </div>
-        @foreach ($subjects as $subject)
+        @if ($subjects)            
         <div class="row border">
             <div class="col-8">
-                <a href="{{route('subjects.show', $subject->id)}}" class="">{{$subject->code,' | '$subject->name}} 
+                <strong>Име на дисциплината</strong>
+            </div>
+            <div class="col-2 text-end">
+                <strong>Кредити</strong>
+            </div>
+            <div class="col-2 text-end">
+                <strong>Управление</strong>
+            </div>
+        </div>
+        @endif
+        @foreach ($subjects as $subject)
+        <div class="row border border-top-0">
+            <div class="col-8">
+                <a href="{{route('subjects.show', $subject->id)}}" class="">{{'('.$subject->code.') '.$subject->name}} 
                 </a>
             </div>
-            <div class="col-4">
+            <div class="col-2 text-end">{{$subject->ects}} ECTS</div>
+            <div class="col-2">
                 {{-- @if (isset(Auth::user()->id)) --}}
                     <div class="d-flex flex-row justify-content-end align-bottom">
                         <a 
@@ -48,9 +62,8 @@
                 
             </div>
         </div>
-        <hr class="">
         @endforeach
-
+<hr>
     {{ $subjects->links() }}
 
 </div>

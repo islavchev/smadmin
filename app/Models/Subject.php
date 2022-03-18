@@ -10,7 +10,7 @@ class Subject extends Model
     use HasFactory;
     protected $table = 'subjects';
     protected $primaryKey = 'id';
-    protected $fillable = ['name', 'lecture_hours', 'seminar_hours', 'ects', 'note', 'code', 'type'];
+    protected $fillable = ['name', 'lecture_hours', 'seminar_hours', 'ects', 'note', 'code', 'type', 'edu_form'];
 
     public function seminars(){
         return $this->hasMany(Seminar::class);

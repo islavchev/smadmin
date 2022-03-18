@@ -16,8 +16,8 @@ class SubjectController extends Controller
     public function index()
     {
         //
-        $academics = Academic::orderBy('id')->paginate(15);
-        return view('academics.index', ['academics'=>$academics]);
+        $subjects = Subject::orderBy('id')->paginate(15);
+        return view('subjects.index', ['subjects'=>$subjects]);
     }
 
     /**
@@ -40,6 +40,28 @@ class SubjectController extends Controller
     public function store(StoreSubjectRequest $request)
     {
         //
+        $request->validate([
+            'code' => 'required',
+            'name' => 'required',
+            'lecture_hours' => 'required',
+            'seminar_hours' => 'required',
+            'ects' => 'required',
+            'type' => 'required',
+            'edu_form' => 'required',
+        ]);
+
+        $subject = Subject::create([
+            'code' => $request->input('code'),
+            'name' => $request->input('name'),
+            'lecture_hours' => $request->input('lecture_hours'),
+            'seminar_hours' => $request->input('seminar_hours'),
+            'ects' => $request->input('ects'),
+            'type' => $request->input('type'),
+            'edu_form' => $request->input('edu_form'),
+            'note' => $request->input('note'), 
+        ]);
+
+        return redirect('subjects');
     }
 
     /**
@@ -51,6 +73,7 @@ class SubjectController extends Controller
     public function show(Subject $subject)
     {
         //
+        return view('subjects.show', ['subject'=>$subject]);
     }
 
     /**
@@ -62,6 +85,7 @@ class SubjectController extends Controller
     public function edit(Subject $subject)
     {
         //
+        return view('subjects.edit')->with('subject', $subject);
     }
 
     /**
@@ -74,6 +98,18 @@ class SubjectController extends Controller
     public function update(UpdateSubjectRequest $request, Subject $subject)
     {
         //
+        $request->validate([
+            'code' => 'required',
+            'name' => 'required',
+            'lecture_hours' => 'required',
+            'seminar_hours' => 'required',
+            'ects' => 'required',
+            'type' => 'required',
+            'edu_form' => 'required',
+        ]);
+        $subject -> update($request -> all());
+
+        return redirect('subjects');
     }
 
     /**
@@ -85,5 +121,8 @@ class SubjectController extends Controller
     public function destroy(Subject $subject)
     {
         //
+        $subject -> delete();
+
+        return redirect()->route('subjects.index');
     }
 }

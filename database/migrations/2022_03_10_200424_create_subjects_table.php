@@ -22,6 +22,7 @@ class CreateSubjectsTable extends Migration
             $table->text('note');
             $table->string('code',6);
             $table->smallInteger('type');
+            $table->smallInteger('edu_form');
             $table->timestamps();
         });
     }

@@ -9,7 +9,7 @@
         {{-- @if (Auth::user())
             <div class=""> --}}
                 <a href="{{route('seminars.create')}}" class="">
-                    <span class="material-icons md-24 px-1 pt-0 pb-0 link-success">more_time</span>
+                    <span class="material-icons md-18 px-1 pt-0 pb-0 btn btn-sm btn-outline-success">more_time</span>
                 </a>
             {{-- </div>
         @endif --}}
