@@ -9,15 +9,16 @@
 <form action="{{route('seminars.store')}}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="row mt-3">
-        <div class="col-md-5 col-8">
-            <label for="seminar_name">Име на модула:</label>
-            <input type="text" name="seminar_name" id="seminar_name" class="form-control form-control-sm"> 
-        </div>
-        <div class="col-md-2 col-4">
-            <label for="seminar_name">Код:</label>
-            <input type="text" name="seminar_code" id="seminar_code" class="form-control form-control-sm"> 
+        <div class="col-md-9 col-12">
+            <label for="subject_id">Дисциплина:</label>
+            <select name="subject_id" id="subject_id" class="form-select form-select-sm">
+                <option value="" selected disabled>Изберете дисциплина:</option>
+                @foreach ($subjects as $subject)
+                    <option value="{{$subject->id}}">{{$subject->name.' - '.config('enums.edu_form')[$subject->edu_form]}}</option>
+                @endforeach
+            </select>
         </div> 
-        <div class="col-md-2 col-8">
+        {{-- <div class="col-md-2 col-8">
             <label for="seminar_type">Вид заетост:</label>
             <select type="text" name="seminar_type" id="academic" class="form-select form-select-sm">
                 <option value="" class="" disabled selected>вид на заетостта...</option>
@@ -25,7 +26,7 @@
                     <option value="{{$loop->iteration}}">{{$seminar_type}}</option>
                 @endforeach
             </select>
-        </div>
+        </div> --}}
     </div>
     <div class="row mt-3">
         <div class="col-md-2 col-5">
@@ -88,9 +89,9 @@
         </div>
     </div>
     <div class="row mt-3">
-        <div class="col-md-4 col-8">
-            <label for="academic">Преподавател:</label>
-            <select type="text" name="academic" id="academic" class="form-select form-select-sm">
+        <div class="col-md-4 col-12">
+            <label for="academic_id">Преподавател:</label>
+            <select type="text" name="academic_id" id="academic_id" class="form-select form-select-sm">
                 <option value="" class="" disabled selected>изберете преподавател</option>
                 @foreach ($academics as $academic)
                     <option value="{{$academic->id}}">{{config('enums.acad_positions')[$academic->acad_position].' '.$academic->first_name.' '.$academic->last_name.', '.config('enums.acad_titles')[$academic->acad_title]}}</option>
@@ -98,8 +99,8 @@
             </select>
         </div>
         <div class="col-md-3">
-            <label for="group">Група:</label>
-            <select type="text" name="group" id="group" class="form-select form-select-sm">
+            <label for="student_group_id">Група:</label>
+            <select type="text" name="student_group_id" id="student_group_id" class="form-select form-select-sm">
                 <option value="" class="" disabled selected>изберете група</option>
                 @foreach ($groups as $group)
                     <option value="{{$group->id}}">{{$group->name}}</option>
@@ -107,8 +108,8 @@
             </select>
         </div>
         <div class="col-md-2">
-            <label for="room">Зала:</label>
-            <select type="text" name="room" id="room" class="form-select form-select-sm">
+            <label for="room_id">Зала:</label>
+            <select type="text" name="room_id" id="room_id" class="form-select form-select-sm">
                 <option value="" class="" disabled selected>изберете зала</option>
                 @foreach ($rooms as $room)
                     <option value="{{$room->id}}">{{$room->room_name}}</option>

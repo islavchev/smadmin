@@ -10,7 +10,7 @@ class Seminar extends Model
     use HasFactory;
     protected $table = 'seminars';
     protected $primaryKey = 'id';
-    protected $fillable = ['seminar_period', 'seminar_type', 'seminar_code', 'seminar_date','seminar_name','room_id', 'academic_id', 'student_group_id'];
+    protected $fillable = ['period', 'date','subject_id','room_id', 'academic_id', 'student_group_id'];
 
     public function room(){
         return $this->belongsTo(Room::class);

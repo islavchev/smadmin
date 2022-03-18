@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreSeminarRequest;
-use App\Http\Requests\UpdateSeminarRequest;
-use App\Models\Seminar;
 use App\Models\Room;
+use App\Models\Seminar;
+use App\Models\Subject;
 use App\Models\Academic;
 use App\Models\StudentGroup;
+use App\Http\Requests\StoreSeminarRequest;
+use App\Http\Requests\UpdateSeminarRequest;
 
 class SeminarController extends Controller
 {
@@ -33,8 +34,9 @@ class SeminarController extends Controller
         $academics = Academic::all();
         $groups = StudentGroup::all();
         $rooms = Room::all();
+        $subjects = Subject::all();
 
-        return view('seminars.create', ['groups'=>$groups, 'academics' => $academics, 'rooms' => $rooms]);
+        return view('seminars.create', ['groups'=>$groups, 'academics' => $academics, 'rooms' => $rooms, 'subjects'=>$subjects]);
 
     }
 
@@ -47,15 +49,13 @@ class SeminarController extends Controller
     public function store(StoreSeminarRequest $request)
     {
         $request->validate([
-            'seminar_name'=>'required',
-            'seminar_code'=>'required',
-            'seminar_type'=>'required',
+            'subject_id'=>'required',
             'classes'=>'required',
             'date_start'=>'required',
             'date_end'=>'required',
-            'academic'=>'required',
-            'group'=>'required',
-            'room'=>'required',
+            'academic_id'=>'required',
+            'student_group_id'=>'required',
+            'room_id'=>'required',
         ]);
 
         $date_start = strtotime($request->date_start);
@@ -66,15 +66,13 @@ class SeminarController extends Controller
                 for ($day_of_week = strtotime(config('enums.weekdays_eng')[$day], $date_start); $day_of_week <= $date_end; $day_of_week = strtotime('+1 week', $day_of_week)){
                     foreach ($request->classes[$day] as $class) {             
                         $seminar = Seminar::create([
-                            'seminar_name' => $request->seminar_name,
-                            'seminar_code' => $request->seminar_code,
-                            'seminar_type' => $request->seminar_type,
-                            'room_id' => $request->room,
-                            'academic_id' => $request->academic,
-                            'student_group_id' => $request->group,
-                            'seminar_period' => $class,
-                            'seminar_date' => date('Y-m-d', $day_of_week) ,
-                        ]);           
+                            'subject_id' => $request->subject_id,
+                            'room_id' => $request->room_id,
+                            'academic_id' => $request->academic_id,
+                            'student_group_id' => $request->student_group_id,
+                            'period' => $class,
+                            'date' => date('Y-m-d', $day_of_week),
+                        ]);   
                         // $end[$day][date('l Y-m-d', $day_of_week)][] = $class;
                     }
                 }
