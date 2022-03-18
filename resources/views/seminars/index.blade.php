@@ -17,19 +17,19 @@
         @if ($seminars->count())
             <div class="row align-items-center">
                 <div class="col-1 text-right border">
-                    <strong>No</strong>
+                    <strong>Код</strong>
                 </div>
                 <div class="col border border-start-0">
-                    <strong>Зала</strong>
+                    <strong>Име</strong>
                 </div>
                 <div class="col-2 border border-start-0 text-center">
-                    <strong>Капацитет</strong>
+                    <strong>Преподавател</strong>
                 </div>
                 <div class="col-2 border border-start-0 text-center">
-                    <strong>Интернет</strong>
+                    <strong>Час</strong>
                 </div>
                 <div class="col-2 border border-start-0 text-center">
-                    <strong>Мултимедия</strong>
+                    <strong>Дата</strong>
                 </div>
                 {{-- @if (isset(Auth::user()->id)) --}}
                     <div class="col-1 text-left border border-start-0">
@@ -43,19 +43,19 @@
         @foreach ($seminars as $seminar)
             <div class="row">          
                 <div class="col-1 border border-top-0 ">
-                        {{$seminar->seminar_code}} 
+                        {{$seminar->subject->code}} 
                 </div>         
                 <div class="col border-end border-bottom">
-                        {{$seminar->seminar_name}} 
+                        {{$seminar->subject->name}} 
                 </div>
                 <div class="col-2 border-end border-bottom text-center">
-                    {{$seminar->seminar_code}}
+                    {{config('enums.acad_positions')[$seminar->academic->acad_position].' '.$seminar->academic->last_name}}
                 </div>
                 <div class="col-2 border-end border-bottom text-center">
-                    {{config('enums.class_periods')[$seminar->seminar_period]}}
+                    {{config('enums.class_periods')[$seminar->period]}}
                 </div>
                 <div class="col-2 border-end border-bottom text-center">
-                    {{$seminar->seminar_date}}
+                    {{$seminar->date}}
                 </div>
                 <div class="col-1 border-end border-bottom">
                 {{-- <div class="col-1 {{isset(Auth::user()->id) ? 'border-start' : ''}}"> --}}

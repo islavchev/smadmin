@@ -42,10 +42,10 @@
 <div class="row">
     <div class="col-2"><Strong>Дисциплини в залата:</Strong></div>
     <div class="col-10">
-        @foreach ($room->seminars->unique('seminar_code') as $seminar)
+        @foreach ($room->seminars->unique('subject_id') as $seminar)
             <div class="row">
                 <div class="col">
-                    {{$seminar->seminar_name}}({{$seminar->seminar_code}})
+                    {{$seminar->subject->name.' ('.$seminar->subject->code.')'}}
                 </div>
                 <div class="col">
                     {{config('enums.acad_positions')[$seminar->academic->acad_position].' '.$seminar->academic->first_name.' '.$seminar->academic->last_name.' '.config('enums.acad_titles')[$seminar->academic->acad_title]}}

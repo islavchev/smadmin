@@ -20,7 +20,7 @@ class SeminarController extends Controller
     public function index()
     {
         //
-        $seminars = Seminar::orderBy('seminar_date')->orderBy('seminar_period')->paginate(15);
+        $seminars = Seminar::orderBy('date')->orderBy('period')->paginate(15);
         return view('seminars.index', ['seminars' => $seminars]);
     }
 
