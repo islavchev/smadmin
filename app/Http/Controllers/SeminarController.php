@@ -53,9 +53,7 @@ class SeminarController extends Controller
             'classes'=>'required',
             'date_start'=>'required',
             'date_end'=>'required',
-            'academic_id'=>'required',
             'student_group_id'=>'required',
-            'room_id'=>'required',
         ]);
 
         $date_start = strtotime($request->date_start);
@@ -93,6 +91,7 @@ class SeminarController extends Controller
     public function show(Seminar $seminar)
     {
         //
+        return view('seminars.show', ['seminar'=>$seminar]);
     }
 
     /**
@@ -104,6 +103,11 @@ class SeminarController extends Controller
     public function edit(Seminar $seminar)
     {
         //
+        $subjects = Subject::all();
+        $academics = Academic::all();
+        $student_groups = StudentGroup::all();
+        $rooms = Room::all();
+        return view('seminars.edit', ['seminar'=>$seminar, 'subjects' => $subjects, 'academics' => $academics, 'student_groups' => $student_groups, 'rooms' => $rooms]);
     }
 
     /**
@@ -116,6 +120,17 @@ class SeminarController extends Controller
     public function update(UpdateSeminarRequest $request, Seminar $seminar)
     {
         //
+        $request->validate([
+            'subject_id'=>'required',
+            'period'=>'required',
+            'date'=>'required',
+            'student_group_id'=>'required',
+        ]);
+        $seminar -> update($request -> all());
+
+        return redirect('seminars');
+
+
     }
 
     /**
@@ -124,23 +139,24 @@ class SeminarController extends Controller
      * @param  \App\Models\Seminar  $seminar
      * @return \Illuminate\Http\Response
      */
-    public function destroy(UpdateSeminarRequest $request)
+    public function destroy(Seminar $seminar)
     {
         //
-        foreach ($request->seminar_ids as $seminar_id) {
-            Seminar::get($seminar_id) -> delete(); 
-        }
+        // foreach ($request->seminar_ids as $seminar_id) {
+            // Seminar::get($seminar_id) -> delete(); 
+        // }
         // $seminar -> delete();
 
-        return redirect()->route('seminars.index');
-    }
-
-    public function destroyMultiple(Seminar $seminar)
-    {
-        //
-
         $seminar -> delete();
-
         return redirect()->route('seminars.index');
     }
+
+    // public function destroyMultiple(Seminar $seminar)
+    // {
+    //     //
+
+    //     $seminar -> delete();
+
+    //     return redirect()->route('seminars.index');
+    // }
 }

@@ -9,7 +9,7 @@
 <form action="{{route('seminars.store')}}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="row mt-3">
-        <div class="col-md-9 col-12">
+        <div class="col-md-6 col-12">
             <label for="subject_id">Дисциплина:</label>
             <select name="subject_id" id="subject_id" class="form-select form-select-sm">
                 <option value="" selected disabled>Изберете дисциплина:</option>
@@ -18,6 +18,15 @@
                 @endforeach
             </select>
         </div> 
+        <div class="col-md-3">
+            <label for="student_group_id">Група:</label>
+            <select type="text" name="student_group_id" id="student_group_id" class="form-select form-select-sm">
+                <option value="" class="" disabled selected>изберете група</option>
+                @foreach ($groups as $group)
+                    <option value="{{$group->id}}">{{$group->name}}</option>
+                @endforeach
+            </select>
+        </div>
         {{-- <div class="col-md-2 col-8">
             <label for="seminar_type">Вид заетост:</label>
             <select type="text" name="seminar_type" id="academic" class="form-select form-select-sm">
@@ -38,7 +47,7 @@
             @foreach (config('enums.class_periods') as $period)
                 <div class="row border border-top-0">
                     <div class="col-12 text-center">
-                        <strong>{{$period}}</strong>
+                        {{$period}}
                     </div>
                 </div>
             @endforeach
@@ -48,7 +57,7 @@
             <div class="col-md-1 col-1">
                 <div class="row border border-start-0"> 
                     <div class="col-12 text-center ps-1">               
-                        <strong>{{$weekday}}</strong>
+                        {{$weekday}}
                     </div>
                 </div>
                 @for ($day_period = 1; $day_period < count(config('enums.class_periods'))+1; $day_period++)
@@ -64,7 +73,7 @@
             <div class="col-md-1 col-1">
                 <div class="row border border-start-0"> 
                     <div class="col-12 text-center ps-1">               
-                        <strong>{{config('enums.weekdays')[0]}}</strong>
+                        {{config('enums.weekdays')[0]}}
                     </div>
                 </div>
                 @for ($sunday_period = 1; $sunday_period < count(config('enums.class_periods'))+1; $sunday_period++)
@@ -90,7 +99,7 @@
     </div>
     <div class="row mt-3">
         <div class="col-md-4 col-12">
-            <label for="academic_id">Преподавател:</label>
+            <label for="academic_id">Преподавател: <span class="badge bg-warning text-dark">незадължително</span> </label>
             <select type="text" name="academic_id" id="academic_id" class="form-select form-select-sm">
                 <option value="" class="" disabled selected>изберете преподавател</option>
                 @foreach ($academics as $academic)
@@ -98,17 +107,8 @@
                 @endforeach
             </select>
         </div>
-        <div class="col-md-3">
-            <label for="student_group_id">Група:</label>
-            <select type="text" name="student_group_id" id="student_group_id" class="form-select form-select-sm">
-                <option value="" class="" disabled selected>изберете група</option>
-                @foreach ($groups as $group)
-                    <option value="{{$group->id}}">{{$group->name}}</option>
-                @endforeach
-            </select>
-        </div>
-        <div class="col-md-2">
-            <label for="room_id">Зала:</label>
+        <div class="col-md-4 offset-md-1">
+            <label for="room_id">Зала: <span class="badge bg-warning text-dark">незадължително</span> </label>
             <select type="text" name="room_id" id="room_id" class="form-select form-select-sm">
                 <option value="" class="" disabled selected>изберете зала</option>
                 @foreach ($rooms as $room)

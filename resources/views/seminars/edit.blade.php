@@ -3,80 +3,62 @@
 @section('content')
 <div class="container">
 
-    <div class="row">
-        <h1>Редактиране на зала</h1>
+    <div class="row mt-2">
+        <h1>Редактиране на занимание</h1>
     </div>
 
-    <form action="{{route('rooms.update',$room->id)}}" method="POST" enctype="multipart/form-data">
+    <form action="{{route('seminars.update',$seminar->id)}}" method="POST" enctype="multipart/form-data">
         @csrf
-        @method('PUT') 
-            <div class="row">
-            <div class="col-2 text-end">
-                <label for="names"><strong>Име на залата:</strong></label>
+        @method('PUT')
+        <div class="row mt-2">
+            <div class="col-md-2"><label for="date"><strong>Дата на заниманието:</strong></label></div>
+            <div class="col-md-10"><input type="date" name="date" id="date" class="form-control form-control-sm" value="{{$seminar->date}}"></div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-md-2"><label for="period"><strong>Час на заниманието:</strong></label></div>
+            <div class="col-md-10"><select name="period" id="period" class="form-select form-select-sm">
+                @foreach (config('enums.class_periods') as $period_key => $period)
+                    <option value="{{$period_key}}" {{$seminar->period == $period_key ? 'selected':''}}>{{$period}}</option>
+                @endforeach    
+            </select></div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-md-2"><label for="subject_id"><strong>Дисциплина:</strong></label></div>
+            <div class="col-md-10">
+                <select name="subject_id" id="subject_id" class="form-select form-select-sm">
+                    @foreach ($subjects as $subject)
+                        <option value="{{$subject->id}}" {{$subject->id == $seminar->subject->id ? 'selected':''}}>{{$subject->name.' - '.config('enums.edu_form')[$subject->edu_form]}}</option>
+                    @endforeach
+                </select>
             </div>
-            <div class="col-10">
-                <input type="text" name="room_name" value="{{$room->room_name}}">
+        </div>
+        <div class="row mt-2">
+            <div class="col-md-2"><label for="student_group_id"><strong>Група:</strong></label></div>
+            <div class="col-md-10">
+                <select name="student_group_id" id="student_group_id" class="form-select form-select-sm">
+                    @foreach ($student_groups as $group)
+                        <option value="{{$group->id}}" {{$group->id == $seminar->student_group->id ? 'selected':''}}>
+                            {{$group->name}}
+                        </option>
+                    @endforeach
+                </select>
             </div>
-            </div> 
-                <div class="form-group">  
-                    <div class="row mt-2">
-                        <div class="col-2 text-end">
-                            <strong>Интернет свързаност:</strong>
-                        </div>
-                        <div class="col-10">
-                            @foreach (config('enums.rooms_internet') as $item) 
-                            <div class="form-check form-check-inline">                  
-                                <input class="form-check-input" type="radio" name="internet" id="inlineRadio{{$loop->iteration}}" value="{{$loop->iteration}}" {{$room->internet == $loop->iteration ? 'checked' :''}} >
-                                <label  class="form-check-label mr-2" for="inlineRadio{{$loop->iteration}}">
-                                    {{ $item }}
-                                </label>
-                            </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div> 
-                <div class="form-group">
-                    <div class="row mt-2">
-                        <div class="col-2 text-end">
-                            <strong>Мултимедия:</strong>
-                        </div>
-                        <div class="col-10">
-                            @foreach (config('enums.rooms_multimedia') as $item) 
-                            <div class="form-check form-check-inline">                  
-                                <input class="form-check-input" type="radio" name="multimedia" id="inlineRadio{{$loop->iteration}}" value="{{$loop->iteration}}"  {{$room->multimedia == $loop->iteration ? 'checked' :''}}>
-                                <label  class="form-check-label mr-2" for="inlineRadio{{$loop->iteration}}">
-                                    {{ $item }}
-                                </label>
-                            </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div> 
-                <div class="form-group">
-                    <div class="row mt-2">
-                        <div class="col-2 text-end">
-                            <label for="room_capacity"><strong>Капацитет на залата:</strong></label>
-                        </div>
-                        <div class="col-10">
-                            <input type="number" name="capacity" id="room_capacity" value="12">
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row mt-2">
-                        <div class="col-2 text-end">
-                            <label for="notes"><strong>Забележки:</strong></label>
-                        </div>                        
-                        <div class="col-10">
-                            <textarea name="notes" id="notes" rows="5">{{$room->notes}}</textarea>
-                        </div>
-                    </div>
-                </div>
-            <button type="submit" class="btn btn-success btn-sm mt-3">
-                Запиши
-            </button>
-        
+        </div>
+        <div class="row mt-2">
+            <div class="col-md-2"><label for="academic"><strong>Преподавател:</strong></label></div>
+            <div class="col-md-10">
+                <select name="academid" id="academic" class="form-select form-select-sm">
+                    @foreach ($academics as $academic)
+                        <option value="{{$academic->id}}" {{$academic->id == $seminar->academic->id ? 'selected':''}}>
+                            {{config('enums.acad_positions')[$academic->acad_position].' '.$academic->first_name.' '.$academic->last_name.', '.config('enums.acad_titles')[$academic->acad_title]}}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success btn-sm mt-3">
+            Запиши
+        </button>        
     </form>  
-
 </div>    
 @endsection
