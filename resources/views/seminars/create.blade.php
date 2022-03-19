@@ -123,4 +123,26 @@
     
 </form>  
 </div>  
+<script type="application/javascript">
+$(function() {
+    $('#date_start').change(function() {
+        var fromDateValue = $(this).val();
+        var toDateValue = $('#date_end').val();
+        var newToDate = toDateValue;
+        if (fromDateValue > toDateValue) {
+            newToDate = fromDateValue;
+        }
+        $('#date_end').val(newToDate);
+    });
+    $('#date_end').change(function() {
+        var fromDateValue = $('#date_start').val();
+        var toDateValue = $(this).val();
+        var newFromDate = fromDateValue;
+        if (fromDateValue > toDateValue) {
+            newFromDate = toDateValue;
+        }
+        $('#date_start').val(newFromDate);
+    });
+})
+</script>
 @endsection
