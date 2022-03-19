@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DateTime;
 use App\Models\Seminar;
 use Illuminate\Http\Request;
 
@@ -10,11 +11,12 @@ class IndexController extends Controller
 
     public function index()
     {
+        // DateTime::createFromFormat('Y-m-d', $seminar->date)->format('d.m.y')
         $today = date("Y-m-d");
 
         for($i=0 ;$i<7; $i++) {
-            $week_array[] = date('Y-m-d', strtotime("this week + $i day", strtotime($today)));
-            $weekday_array[] = date('w', strtotime("this week + $i day", strtotime($today)));
+            $week_array[] = date('Y-m-d', strtotime("this week + $i day",  DateTime::createFromFormat('Y-m-d',$today)->getTimestamp()));
+            $weekday_array[] = date('w', strtotime("this week + $i day", DateTime::createFromFormat('Y-m-d',$today)->getTimestamp()));
         }
         if (Seminar::first()!=null) {
             $seminars = Seminar::where('date', '>=', $week_array[0])->where('date', '<=', $week_array[5])->get();

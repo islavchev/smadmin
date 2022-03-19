@@ -16,7 +16,13 @@
     </div>
         @if ($seminars->count())
             <div class="row align-items-center">
-                <div class="col-1 text-right border">
+                <div class="col-1 border border text-center">
+                    <strong>Дата</strong>
+                </div>
+                <div class="col-2 border border-start-0 text-center">
+                    <strong>Час</strong>
+                </div>
+                <div class="col-1 text-right border border-start-0">
                     <strong>Код</strong>
                 </div>
                 <div class="col border border-start-0">
@@ -25,24 +31,24 @@
                 <div class="col-2 border border-start-0 text-center">
                     <strong>Преподавател</strong>
                 </div>
-                <div class="col-2 border border-start-0 text-center">
-                    <strong>Час</strong>
-                </div>
-                <div class="col-2 border border-start-0 text-center">
-                    <strong>Дата</strong>
-                </div>
                 {{-- @if (isset(Auth::user()->id)) --}}
                     <div class="col-1 text-left border border-start-0">
                     <strong> Редакция</strong>
                     </div>
-                {{-- @endif                                        --}}
+                {{-- @endif --}}
             </div>    
         @else
             <strong>Няма въведени зали</strong>
         @endif
         @foreach ($seminars as $seminar)
-            <div class="row">          
-                <div class="col-1 border border-top-0 ">
+            <div class="row">
+                <div class="col-1 border border-top-0 text-center">
+                    {{DateTime::createFromFormat('Y-m-d', $seminar->date)->format('d.m.y')}}
+                </div> 
+                <div class="col-2 border-end border-bottom text-center">
+                    {{config('enums.class_periods')[$seminar->period]}}
+                </div>         
+                <div class="col-1 border-end border-bottom">
                         {{$seminar->subject->code}} 
                 </div>         
                 <div class="col border-end border-bottom">
@@ -50,12 +56,6 @@
                 </div>
                 <div class="col-2 border-end border-bottom text-center">
                     {{config('enums.acad_positions')[$seminar->academic->acad_position].' '.$seminar->academic->last_name}}
-                </div>
-                <div class="col-2 border-end border-bottom text-center">
-                    {{config('enums.class_periods')[$seminar->period]}}
-                </div>
-                <div class="col-2 border-end border-bottom text-center">
-                    {{$seminar->date}}
                 </div>
                 <div class="col-1 border-end border-bottom">
                 {{-- <div class="col-1 {{isset(Auth::user()->id) ? 'border-start' : ''}}"> --}}
