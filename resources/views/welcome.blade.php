@@ -76,7 +76,6 @@
     </div>
 </div>
 
-<script type="application/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="application/javascript">
     $(document).ready(function() {
         var periods = @json(config('enums.class_periods'));
