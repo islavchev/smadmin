@@ -19,10 +19,6 @@
     </div> --}}
 
     <div class="row">
-        <div class="col-sm-2 col-md-2 my-1"><a href="{{route('rooms.index')}}" class="btn btn-outline-secondary w-100">Зали</a></div>
-        <div class="col-sm-2 col-md-2 my-1"><a href="{{route('student_groups.index')}}" class="btn btn-outline-secondary w-100">Групи</a></div>
-        <div class="col-sm-3 col-md-3 col-lg-2 my-1"><a href="{{route('subjects.index')}}" class="btn btn-outline-secondary w-100">Дисциплини</a></div>      
-        <div class="col-sm-4 col-md-3 col-lg-2 my-1"><a href="{{route('academics.index')}}" class="btn btn-outline-secondary w-100">Преподаватели</a></div>
         <div class="col-sm-2 col-lg-1 ms-auto my-1"><a href="{{route('seminars.create')}}" class="btn btn-outline-success w-100 py-1 pb-0"><span class="material-icons">more_time</span></a></div>
         <div class="col-sm-2 col-lg-1 my-1"><a href="{{route('seminars.index')}}" class="btn btn-outline-warning w-100 py-1 pb-0"><span class="material-icons">pending_actions</span></a></div>
     </div>

@@ -39,6 +39,7 @@
 </head>
 <body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
     <script type="application/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
@@ -58,6 +59,16 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="editNavbar" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Редакция</a>
+                            <ul class="dropdown-menu" aria-labelledby="editNavbar">
+                                <li><a href="{{route('rooms.index')}}" class="dropdown-item">Зали</a></li>
+                                <li><a href="{{route('student_groups.index')}}" class="dropdown-item">Групи</a></li>
+                                <li><a href="{{route('subjects.index')}}" class="dropdown-item">Дисциплини</a></li>
+                                <li><a href="{{route('academics.index')}}" class="dropdown-item">Преподаватели</a></li>
+                            </ul>
+                        </li>
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
