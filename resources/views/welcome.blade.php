@@ -54,8 +54,21 @@
                             @if ($seminar->date == $weekday && $seminar->period == $period)
                                 <div class="row {{$seminars_count>0 ? 'border-top':''}}" style="font-size:0.7rem">
                                     <div class="col p-0">{{$seminar->subject->code}}</div>
-                                    <div class="col p-0"><a href="{{route('academics.show', $seminar->academic)}}" class="link-success">{{$seminar->academic->abbreviation}}</a></div> 
-                                    <div class="col p-0"><a href="{{route('rooms.show', $seminar->room)}}">{{$seminar->room->room_name}}</a></div>
+                                    <div class="col p-0">
+                                        @isset($seminar->academic)
+                                        <a href="{{route('academics.show',$seminar->academic)}}" class="link-success">{{$seminar->academic->abbreviation}}</a>
+                                        @else
+                                            N/A
+                                        @endisset
+                                    </div> 
+                                    <div class="col p-0">
+                                        @isset($seminar->room)
+                                            <a href="{{route('rooms.show', $seminar->room)}}" class="link-success">{{$seminar->room->room_name}}</a>
+                                        @else
+                                            N/A
+                                        @endisset
+                                    </div> 
+                                        
                                     <div class="col p-0">{{$seminar->student_group->name}}</div>
                                 </div>
                                 @php
