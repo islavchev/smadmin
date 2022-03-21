@@ -38,7 +38,7 @@
                 {{-- @endif --}}
             </div>    
         @else
-            <strong>Няма въведени зали</strong>
+            <strong>Няма въведени занимания</strong>
         @endif
         @foreach ($seminars as $seminar)
             <div class="row">
