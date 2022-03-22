@@ -53,7 +53,6 @@ class SeminarController extends Controller
             'classes'=>'required',
             'date_start'=>'required',
             'date_end'=>'required',
-            'student_group_id'=>'required',
         ]);
 
         $date_start = strtotime($request->date_start);
@@ -124,7 +123,6 @@ class SeminarController extends Controller
             'subject_id'=>'required',
             'period'=>'required',
             'date'=>'required',
-            'student_group_id'=>'required',
         ]);
         $seminar -> update($request -> all());
 
