@@ -14,7 +14,7 @@
         </div>
         <div class="row my-2">
             <div class="col-6 col-md-2">
-                <input type="number" name="year" id="year" value="2022" min="1990" max="2200" class="form-control form-control-sm">
+                <input type="number" name="year" id="year" value="{{date('Y')}}" min="1990" max="2200" class="form-control form-control-sm">
             </div>
             <div class="col-6 col-md-2">
                 <select name="semester" id="semester" class="form-select form-select-sm">
