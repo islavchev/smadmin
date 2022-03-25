@@ -21,6 +21,7 @@
     <div class="row">
         <div class="col-sm-2 col-lg-1 ms-auto my-1"><a href="{{route('seminars.create')}}" class="btn btn-outline-success w-100 py-1 pb-0"><span class="material-icons">more_time</span></a></div>
         <div class="col-sm-2 col-lg-1 my-1"><a href="{{route('seminars.index')}}" class="btn btn-outline-warning w-100 py-1 pb-0"><span class="material-icons">pending_actions</span></a></div>
+        <div class="col-sm-2 col-lg-1 my-1"><a href="{{route('semester_choose')}}" class="btn btn-outline-primary w-100 py-1 pb-0"><span class="material-icons">calendar_month</span></a></div>
     </div>
     <div class="row">
         <div class="col-lg-1 col-md-3 col-sm-12 mt-3 border border-secondary h-auto" style="background-color:lightgray">
@@ -53,8 +54,8 @@
                             @foreach ($seminars->sortBy('period')->sortBy('date') as $seminar)
                             @if ($seminar->date == $weekday && $seminar->period == $period)
                                 <div class="row {{$seminars_count>0 ? 'border-top':''}}" style="font-size:0.7rem">
-                                    <div class="col p-0">{{$seminar->subject->code}}</div>
-                                    <div class="col p-0">
+                                    <div class="col py-0 ps-1 pe-0">{{$seminar->subject->code}}</div>
+                                    <div class="col py-0 px-1">
                                         @isset($seminar->academic)
                                         <a href="{{route('academics.show',$seminar->academic)}}" class="link-success">{{$seminar->academic->abbreviation}}</a>
                                         @else

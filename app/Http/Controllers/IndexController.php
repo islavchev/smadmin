@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use DateTime;
 use App\Models\Seminar;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class IndexController extends Controller
 {
@@ -28,4 +29,39 @@ class IndexController extends Controller
 
         return view('welcome', ['seminars'=>$seminars, 'today'=>$today, 'week_array'=>$week_array, 'weekday_array'=>$weekday_array]); 
     }
+
+    public function semester_choose(){
+
+        return view ('semester.choose');
+
+    }
+
+    public function semester_show(Request $request){
+
+        $request->validate([
+            'year'=>'required',
+            'semester'=>'required',
+        ]);
+        
+        // select only seminars in the given year and semester
+        $semester = $request->semester > 1 ? '> 7' : '<= 7';
+        $seminars = Seminar::whereRaw('YEAR(date) = '.$request->year.' AND MONTH(date) '.$semester)->orderBy('date')->get();
+
+        $grouped = $seminars->groupBy(function ($item){
+            return DateTime::createFromFormat('Y-m-d', $item->date)->format('w').$item->period.$item->subject_id.$item->student_group_id.$item->academic_id.$item->room_id;
+        });
+
+        $grouped_iteration=0;
+        foreach ($grouped as $group => $one_seminar) {
+            $schedule[substr($group, 0, 1)][substr($group,1,1)][] = ['start_time' => DateTime::createFromFormat('Y-m-d', $one_seminar->first()->date)->format('d.m.'), 'end_time' => DateTime::createFromFormat('Y-m-d', $one_seminar->last()->date)->format('d.m.'), 'seminar_id' => $one_seminar->first()->id];
+        }
+
+      
+        // dd($schedule);
+
+        return view('semester.show')->with('schedule', $schedule)->with('seminars', $seminars); 
+    }
+
+
+
 }

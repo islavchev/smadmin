@@ -25,6 +25,8 @@ use App\Http\Controllers\SubjectController;
 // });
 
 Route::get('/', [IndexController::class, 'index']);
+Route::get('/semester_choose', [IndexController::class, 'semester_choose'])->name('semester_choose');
+Route::put('/semester_show', [IndexController::class, 'semester_show'])->name('semester_show');
 
 Auth::routes();
 
