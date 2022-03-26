@@ -69,8 +69,12 @@
                 <div class="col-6 border border-start-0 text-end d-block d-md-none">
                     <strong>Преподавател</strong>
                 </div>
-                <div class="col-6 col-md-2 border-end border-bottom text-start">
-                    {{config('enums.acad_positions')[$seminar->academic->acad_position].' '.$seminar->academic->last_name}}
+                <div class="col-6 col-md-2 border-end border-bottom text-start"> 
+                    @isset($seminar->academic)
+                    {{config('enums.acad_positions')[$seminar->academic->acad_position].' '.$seminar->academic->last_name}} 
+                    @else
+                    N/A
+                    @endisset
                 </div>
                 {{-- <div class="col-1 {{isset(Auth::user()->id) ? 'border-start' : ''}}"> --}}
                     {{-- @if (isset(Auth::user()->id)) --}}
