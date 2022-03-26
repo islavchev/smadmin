@@ -15,7 +15,7 @@
             </div>
         </div>
         @foreach ($academics as $teacher)
-        <div class="row border">
+        <div class="row">
             <div class="col-8">
                 <a href="{{route('academics.show', $teacher->id)}}" class="">
                     {{ config('enums.acad_positions')[$teacher->acad_position] }} {{ $teacher->first_name }} {{ $teacher->last_name }}, {{ config('enums.acad_titles')[$teacher->acad_title] }} 
@@ -55,7 +55,6 @@
                 
             </div>
         </div>
-        <hr class="">
         @endforeach
 
     {{ $academics->links() }}

@@ -18,29 +18,29 @@
 </div>
 
 <div class="row">
-    <div class="col-2 text-end"><strong>Имена:</strong></div>
-    <div class="col-10">{{$academic->first_name}} {{$academic->last_name}}</div>
+    <div class="col-6 col-md-2 text-end"><strong>Имена:</strong></div>
+    <div class="col-6 col-md-10">{{$academic->first_name}} {{$academic->last_name}}</div>
 </div>
 <div class="row">
-    <div class="col-2 text-end"><strong>Обр./научна степен:</strong></div>
-    <div class="col-10">{{config('enums.acad_titles')[$academic->acad_title]}} </div>
+    <div class="col-6 col-md-2 text-end"><strong>Обр./научна степен:</strong></div>
+    <div class="col-6 col-md-10">{{config('enums.acad_titles')[$academic->acad_title]}} </div>
 </div>
 <div class="row">
-    <div class="col-2 text-end"><strong>Академична длъжност:</strong></div>
-    <div class="col-10">{{config('enums.acad_positions')[$academic->acad_position]}}</div>
+    <div class="col-6 col-md-2 text-end"><strong>Академична длъжност:</strong></div>
+    <div class="col-6 col-md-10">{{config('enums.acad_positions')[$academic->acad_position]}}</div>
 </div>
 <div class="row">
-    <div class="col-2 text-end"><strong>Кабинет:</strong></div>
-    <div class="col-10">{{$academic->room_no}}</div>
+    <div class="col-6 col-md-2 text-end"><strong>Кабинет:</strong></div>
+    <div class="col-6 col-md-10">{{$academic->room_no}}</div>
 </div>
 <div class="row">
-    <div class="col-2 text-end"><strong>Телефон:</strong></div>
-    <div class="col-10">{{$academic->phone}}</div>
+    <div class="col-6 col-md-2 text-end"><strong>Телефон:</strong></div>
+    <div class="col-6 col-md-10">{{$academic->phone}}</div>
 </div>
 
 <div class="row">
-    <div class="col-2 text-end"><strong>Електронна поща:</strong></div>
-    <div class="col-10">{{$academic->email}}</div>
+    <div class="col-6 col-md-2 text-end"><strong>Електронна поща:</strong></div>
+    <div class="col-6 col-md-10">{{$academic->email}}</div>
 </div>
 
 </div>

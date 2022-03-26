@@ -16,23 +16,23 @@
     </div>
         @if ($rooms->count())
         <div class="row align-items-center">
-            <div class="col-1 text-right border">
+            <div class="col-6 col-md-1 text-right border">
                 <strong>No</strong>
             </div>
-            <div class="col border border-start-0">
+            <div class="col-6 col-md border border-start-0">
                 <strong>Зала</strong>
             </div>
-            <div class="col-2 border border-start-0 text-center">
+            <div class="col-6 col-md-2 border border-start-0 text-center">
                 <strong>Капацитет</strong>
             </div>
-            <div class="col-2 border border-start-0 text-center">
+            <div class="col-6 col-md-2 border border-start-0 text-center">
                 <strong>Интернет</strong>
             </div>
-            <div class="col-2 border border-start-0 text-center">
+            <div class="col-6 col-md-2 border border-start-0 text-center">
                 <strong>Мултимедия</strong>
             </div>
             {{-- @if (isset(Auth::user()->id)) --}}
-                <div class="col-1 text-left border border-start-0">
+                <div class="col-6 col-md-1 text-left border border-start-0">
                 <strong> Редакция</strong>
                 </div>
             {{-- @endif                                        --}}
@@ -42,24 +42,24 @@
         @endif
         @foreach ($rooms as $room)
             <div class="row">             
-                <div class="col-1 text-right border border-top-0">
+                <div class="col-6 col-md-1 text-right border border-top-0">
                     {{$loop->iteration}}
                 </div>
-                <div class="col border-end border-bottom">
+                <div class="col-6 col-md border-end border-bottom">
                     <a href="{{ route('rooms.show', $room->id) }}" class="btn btn-outline-secondary w-100 py-0">
                         {{$room->room_name}} 
                     </a>
                 </div>
-                <div class="col-2 border-end border-bottom text-center">
+                <div class="col-6 col-md-2 border-end border-bottom text-center">
                     {{$room->capacity}}
                 </div>
-                <div class="col-2 border-end border-bottom text-center">
+                <div class="col-6 col-md-2 border-end border-bottom text-center">
                     {{config('enums.rooms_internet')[$room->internet]}}
                 </div>
-                <div class="col-2 border-end border-bottom text-center">
+                <div class="col-6 col-md-2 border-end border-bottom text-center">
                     {{config('enums.rooms_multimedia')[$room->multimedia]}}
                 </div>
-                <div class="col-1 border-end border-bottom">
+                <div class="col-6 col-md-1 border-end border-bottom">
                 {{-- <div class="col-1 {{isset(Auth::user()->id) ? 'border-start' : ''}}"> --}}
                     {{-- @if (isset(Auth::user()->id)) --}}
                         <div class="d-flex flex-row justify-content-end align-items-end">
