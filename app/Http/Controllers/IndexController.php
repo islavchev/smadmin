@@ -62,6 +62,49 @@ class IndexController extends Controller
         return view('semester.show')->with('schedule', $schedule)->with('seminars', $seminars); 
     }
 
+    public function checkConflicts(Request $request){
 
+        $seminars = Seminar::orderBy('date')->get();
+        
+        $grouped= $seminars->groupBy(function ($item){
+            return $item->date.$item->period;
+        });
 
+        foreach ($grouped as $cases) {
+            if ($cases->count() > 1) {
+                // $conflicts[]=$cases;
+                $conflict_check = $cases->groupBy('academic_id');
+                foreach ($conflict_check as $single_check) {
+                    if ($single_check->count() > 1 ) {
+                        $conflicts[] = ['date' => $single_check->first()->date, 'period' => $single_check->first()->period];
+                    }
+                }
+                $conflict_check = $cases->groupBy('student_group_id');
+                foreach ($conflict_check as $single_check) {
+                    if ($single_check->count() > 1 ) {
+                        $conflicts[] = ['date' => $single_check->first()->date, 'period' => $single_check->first()->period];
+                    }
+                }
+                $conflict_check = $cases->groupBy('room_id');
+                foreach ($conflict_check as $single_check) {
+                    if ($single_check->count() > 1 ) {
+                        $conflicts[] = ['date' => $single_check->first()->date, 'period' => $single_check->first()->period];
+                    }
+                }
+            }
+        }
+
+        $serialized = array_map('serialize', $conflicts);
+        $unique = array_unique($serialized);
+        $conflicts = array_intersect_key($conflicts, $unique);
+
+        foreach ($conflicts as $conflict_schedule) {
+            // $conflict_seminars[] = $conflict_schedule['date'].'-'.$conflict_schedule['period'];
+            $conflict_seminars[] = $seminars -> where('date', '=', $conflict_schedule['date'])->where('period', '=', $conflict_schedule['period']);
+        }
+
+        // dd($conflict_seminars);
+
+        return view('conflicts.show')->with('conflict_seminars', $conflict_seminars);
+    }
 }

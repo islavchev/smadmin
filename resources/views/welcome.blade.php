@@ -19,9 +19,10 @@
     </div> --}}
 
     <div class="row">
-        <div class="col-sm-2 col-lg-1 ms-auto my-1"><a href="{{route('seminars.create')}}" class="btn btn-outline-success w-100 py-1 pb-0"><span class="material-icons">more_time</span></a></div>
-        <div class="col-sm-2 col-lg-1 my-1"><a href="{{route('seminars.index')}}" class="btn btn-outline-warning w-100 py-1 pb-0"><span class="material-icons">pending_actions</span></a></div>
-        <div class="col-sm-2 col-lg-1 my-1"><a href="{{route('semester_choose')}}" class="btn btn-outline-primary w-100 py-1 pb-0"><span class="material-icons">calendar_month</span></a></div>
+        <div class="col-sm-2 col-lg-1 ms-auto my-1"><a title="Добавете занимания" href="{{route('seminars.create')}}" class="btn btn-outline-success w-100 py-1 pb-0"><span class="material-icons">more_time</span></a></div>
+        <div class="col-sm-2 col-lg-1 my-1"><a title="Списък на заниманията" href="{{route('seminars.index')}}" class="btn btn-outline-warning w-100 py-1 pb-0"><span class="material-icons">pending_actions</span></a></div>
+        <div class="col-sm-2 col-lg-1 my-1"><a title="Седмично разписание за семестър" href="{{route('semester_choose')}}" class="btn btn-outline-primary w-100 py-1 pb-0"><span class="material-icons">calendar_month</span></a></div>
+        <div class="col-sm-2 col-lg-1 my-1"><a title="Проверка за конфликти в разписанието" href="{{route('check_conflicts')}}" class="btn btn-outline-danger w-100 py-1 pb-0"><span class="material-icons">event_busy</span></a></div>
     </div>
     <div class="row">
         <div class="col-lg-1 col-md-3 col-sm-12 mt-3 border border-secondary h-auto" style="background-color:lightgray">
