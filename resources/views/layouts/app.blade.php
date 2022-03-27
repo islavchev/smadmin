@@ -54,6 +54,10 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
+                        <a title="Добавете занимания" href="{{route('seminars.create')}}" class="btn btn-outline-success pb-0 me-1"><span class="material-icons">more_time</span></a>
+                        <a title="Списък на заниманията" href="{{route('seminars.index')}}" class="btn btn-outline-warning pb-0 me-1"><span class="material-icons">pending_actions</span></a>
+                        <a title="Седмично разписание за семестър" href="{{route('semester_choose')}}" class="btn btn-outline-primary pb-0 me-1"><span class="material-icons">calendar_month</span></a>
+                        <a title="Проверка за конфликти в разписанието" href="{{route('check_conflicts')}}" class="btn btn-outline-danger pb-0 me-1"><span class="material-icons">event_busy</span></a>
 
                     </ul>
 
