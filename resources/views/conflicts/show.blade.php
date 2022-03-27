@@ -4,6 +4,7 @@
     <div class="row">
         <h1>Конфликти в планирането на заниманията</h1>
     </div>
+    @if(!empty($conflict_seminars))
     @foreach ($conflict_seminars as $seminars)
         <div class="row border-bottom">
             <div class="col">
@@ -53,5 +54,8 @@
             </div>
         </div>    
     @endforeach
+    @else
+    <p>Няма открити конфликти в зададения период.</p>
+    @endif
 </div>
 @endsection

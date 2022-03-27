@@ -146,7 +146,8 @@ class SeminarController extends Controller
         // $seminar -> delete();
 
         $seminar -> delete();
-        return redirect()->route('seminars.index');
+        // return redirect()->route('seminars.index');
+        return back();
     }
 
     // public function destroyMultiple(Seminar $seminar)

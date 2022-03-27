@@ -69,7 +69,7 @@ class IndexController extends Controller
         $grouped= $seminars->groupBy(function ($item){
             return $item->date.$item->period;
         });
-
+        $conflicts = [];
         foreach ($grouped as $cases) {
             if ($cases->count() > 1) {
                 // $conflicts[]=$cases;
@@ -97,7 +97,7 @@ class IndexController extends Controller
         $serialized = array_map('serialize', $conflicts);
         $unique = array_unique($serialized);
         $conflicts = array_intersect_key($conflicts, $unique);
-
+        $conflict_seminars = [];
         foreach ($conflicts as $conflict_schedule) {
             // $conflict_seminars[] = $conflict_schedule['date'].'-'.$conflict_schedule['period'];
             $conflict_seminars[] = $seminars -> where('date', '=', $conflict_schedule['date'])->where('period', '=', $conflict_schedule['period']);
