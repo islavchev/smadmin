@@ -47,7 +47,7 @@
         <div class="row mt-2">
             <div class="col-md-2"><label for="academic"><strong>Преподавател:</strong></label></div>
             <div class="col-md-10">
-                <select name="academid" id="academic" class="form-select form-select-sm">
+                <select name="academic_id" id="academic" class="form-select form-select-sm">
                     @foreach ($academics as $academic)
                         <option value="{{$academic->id}}" {{$academic->id == $seminar->academic->id ? 'selected':''}}>
                             {{config('enums.acad_positions')[$academic->acad_position].' '.$academic->first_name.' '.$academic->last_name.', '.config('enums.acad_titles')[$academic->acad_title]}}

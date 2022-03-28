@@ -17,9 +17,9 @@
             <img src="https://nsa-management.com/images/Dept-MIS-Header-Logosa.png" alt="Management and history of sport department's logo" width="50%" class="float-right">    
         </div>
     </div> --}}
-    
-    <div class="row">
-        <div class="col-lg-1 col-md-3 col-sm-12 mt-3 border border-secondary h-auto" style="background-color:lightgray">
+
+    <div class="row p-2 p-md-0">
+        <div class="col-lg-1 col-md-3 col-sm-6 mt-3 border border-secondary h-auto" style="background-color:lightgray">
             <div class="row text-center"><strong>Period</strong></div>
             @foreach ( config('enums.class_periods') as $key => $class_period)
                 <div class="row border-top border-secondary text-center Row{{$loop -> iteration}} align-items-center">
@@ -33,7 +33,7 @@
             @endforeach
         </div>
         @foreach ($week_array as $weekday)
-        <div class="col-lg col-md-3 col-sm-12 mt-3 border border-start-0 border-secondary" style="{{ $loop->even ? "background-color:lightgray;":"" }} {{$weekday==$today ? "background-color:lightblue" : "" }}">
+        <div class="col-lg col-md-3 col-sm-6 mt-3 border border-start-0 border-secondary" style="{{ $loop->even ? "background-color:lightgray;":"" }} {{$weekday==$today ? "background-color:lightblue" : "" }}">
             <div class="row text-center" style="background-color: lightgray"><strong>{{date('d.m.y', DateTime::createFromFormat('Y-m-d',$weekday)->getTimestamp()).' ('.config('enums.weekdays')[$weekday_array[$loop->iteration-1]].')'}}</strong></div>
             @foreach ( config('enums.class_periods') as $key => $class_period)
                 <div class="row border-top border-secondary justify-content-center text-center Row{{$loop -> iteration}}">

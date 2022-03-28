@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-    <div class="row">
-        <div class="col-lg-1 col-md-3 col-sm-12 mt-3 border border-secondary h-auto" style="background-color:lightgray">
+    <div class="row p-2 p-md-0">
+        <div class="col-lg-1 col-md-3 col-sm-6 mt-3 border border-secondary h-auto" style="background-color:lightgray">
             <div class="row text-center"><strong>Period</strong></div>
             @foreach ( config('enums.class_periods') as $key => $class_period)
                 <div class="row border-top border-secondary text-center Row{{$loop -> iteration}} align-items-center">
@@ -17,7 +17,7 @@
         </div>
         @foreach (config('enums.weekdays') as $num_weekday => $weekday)
         @if ($loop->first==false)
-        <div class="col-lg col-md-3 col-sm-12 mt-3 border border-start-0 border-secondary" style="{{ $loop->odd ? "background-color:lightgray;":"" }}">
+        <div class="col-lg col-md-3 col-sm-6 mt-3 border border-start-0 border-secondary {{$loop->iteration == 5 ? 'border-md-start' : ''}} " style="{{ $loop->odd ? "background-color:lightgray;":"" }}">
             <div class="row text-center" style="background-color: lightgray"><strong>{{$weekday}}</strong></div>
             @foreach ( config('enums.class_periods') as $key => $class_period)
                 <div class="row border-top border-secondary justify-content-center text-center Row{{$loop -> iteration}}">
@@ -72,7 +72,7 @@
         </div>
         @endif
         @if ($loop->last)
-            <div class="col-lg col-md-3 col-sm-12 mt-3 border border-start-0 border-secondary">
+            <div class="col-lg col-md-3 col-sm-6 mt-3 border border-start-0 border-secondary">
                 <div class="row text-center" style="background-color: lightgray">               
                     <strong>{{config('enums.weekdays')[0]}}<strong>
                 </div>

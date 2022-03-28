@@ -124,6 +124,9 @@ class SeminarController extends Controller
             'period'=>'required',
             'date'=>'required',
         ]);
+
+        // dd($request);
+        
         $seminar -> update($request -> all());
 
         return redirect('seminars');
