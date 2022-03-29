@@ -51,7 +51,7 @@ class IndexController extends Controller
             return DateTime::createFromFormat('Y-m-d', $item->date)->format('w').$item->period.$item->subject_id.$item->group_id.$item->academic_id.$item->room_id;
         });
 
-        $grouped_iteration=0;
+        // $grouped_iteration=0;
         foreach ($grouped as $group => $one_seminar) {
             $schedule[substr($group, 0, 1)][substr($group,1,1)][] = ['start_time' => DateTime::createFromFormat('Y-m-d', $one_seminar->first()->date)->format('d.m.'), 'end_time' => DateTime::createFromFormat('Y-m-d', $one_seminar->last()->date)->format('d.m.'), 'seminar_id' => $one_seminar->first()->id];
         }
