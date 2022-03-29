@@ -39,7 +39,7 @@
 </div>
 <div class="row">
     <div class="col-2"><strong>Група:</strong></div>
-    <div class="col-10">{{$seminar->student_group->name}}</div>
+    <div class="col-10">{{$seminar->group->name}}</div>
 </div>
 <div class="row">
     <div class="col-2"><strong>Преподавател:</strong></div>

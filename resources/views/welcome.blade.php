@@ -65,7 +65,7 @@
                                         @endisset
                                     </div> 
                                         
-                                    <div class="col p-0">{{$seminar->student_group->name}}</div>
+                                    <div class="col p-0">{{$seminar->group->name}}</div>
                                 </div>
                                 @php
                                     $seminars_count++;

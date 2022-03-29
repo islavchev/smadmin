@@ -58,7 +58,7 @@
                     <strong>Група</strong>
                 </div>     
                 <div class="col-6 col-md-2 col-lg-1 border-end border-bottom text-start">
-                    {{$seminar->student_group->name}} 
+                    {{$seminar->group->name}} 
                 </div>    
                 <div class="col-6 border border-start-0 text-end d-block d-md-none">
                     <strong>Име</strong>

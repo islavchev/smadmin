@@ -8,14 +8,14 @@
             </div>
             <div class="col-6 text-end">
                 {{-- @if (Auth::user()) --}}
-                    <a href="{{route('student_groups.create')}}" class="ms-auto">
+                    <a href="{{route('groups.create')}}" class="ms-auto">
                         <span class="material-icons md-18 px-1 pt-0 pb-0 btn btn-sm btn-outline-success">group_add</span>                   
                     </a>
                 {{-- @endif --}}
             </div>
         </div>
         <div class="d-flex flex-row flex-wrap">
-        @foreach ($student_groups as $group)
+        @foreach ($groups as $group)
             <div class="col-sm-2 d-flex border ps-2 pt-1 align-items-center">
                     {{ $group->name }}
 
@@ -30,13 +30,13 @@
                     {{-- <div class="d-flex flex-row justify-content-end align-bottom"> --}}
                         {{-- <a 
                             class="btn btn-link link-info px-1 pb-0 pt-1"
-                            href="{{ route('student_groups.edit', $group->id) }}">
+                            href="{{ route('groups.edit', $group->id) }}">
                             <span class="material-icons md-18">
                                 edit
                                 </span>
                         </a> --}}
 
-                        <form action="{{ route('student_groups.destroy', $group->id) }}" class="" method="POST">
+                        <form action="{{ route('groups.destroy', $group->id) }}" class="" method="POST">
                             @csrf
                             @method('delete')
                             <button 
@@ -55,7 +55,7 @@
         @endforeach
     </div>
 
-    {{ $student_groups->links() }}
+    {{ $groups->links() }}
 
 </div>
 @endsection

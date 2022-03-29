@@ -73,7 +73,7 @@
                 {{config('enums.class_periods')[$seminar->period]}}
             </div>
             <div class="col-md-2">
-                {{$seminar->student_group->name}}
+                {{$seminar->group->name}}
             </div>
             <div class="col-md-3">
                 {{$seminar->subject->code}}

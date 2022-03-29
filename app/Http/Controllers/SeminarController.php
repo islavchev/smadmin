@@ -6,7 +6,7 @@ use App\Models\Room;
 use App\Models\Seminar;
 use App\Models\Subject;
 use App\Models\Academic;
-use App\Models\StudentGroup;
+use App\Models\Group;
 use App\Http\Requests\StoreSeminarRequest;
 use App\Http\Requests\UpdateSeminarRequest;
 
@@ -32,7 +32,7 @@ class SeminarController extends Controller
     public function create()
     {
         $academics = Academic::all();
-        $groups = StudentGroup::all();
+        $groups = Group::all();
         $rooms = Room::all();
         $subjects = Subject::all();
 
@@ -66,7 +66,7 @@ class SeminarController extends Controller
                             'subject_id' => $request->subject_id,
                             'room_id' => $request->room_id,
                             'academic_id' => $request->academic_id,
-                            'student_group_id' => $request->student_group_id,
+                            'group_id' => $request->group_id,
                             'period' => $class,
                             'date' => date('Y-m-d', $day_of_week),
                         ]);   
@@ -104,9 +104,9 @@ class SeminarController extends Controller
         //
         $subjects = Subject::all();
         $academics = Academic::all();
-        $student_groups = StudentGroup::all();
+        $groups = Group::all();
         $rooms = Room::all();
-        return view('seminars.edit', ['seminar'=>$seminar, 'subjects' => $subjects, 'academics' => $academics, 'student_groups' => $student_groups, 'rooms' => $rooms]);
+        return view('seminars.edit', ['seminar'=>$seminar, 'subjects' => $subjects, 'academics' => $academics, 'groups' => $groups, 'rooms' => $rooms]);
     }
 
     /**

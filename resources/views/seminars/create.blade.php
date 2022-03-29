@@ -19,8 +19,8 @@
             </select>
         </div> 
         <div class="col-md-3">
-            <label for="student_group_id">Група:</label>
-            <select type="text" name="student_group_id" id="student_group_id" class="form-select form-select-sm">
+            <label for="group_id">Група:</label>
+            <select type="text" name="group_id" id="group_id" class="form-select form-select-sm">
                 <option value="" class="" disabled selected>изберете група</option>
                 @foreach ($groups as $group)
                     <option value="{{$group->id}}">{{$group->name}}</option>

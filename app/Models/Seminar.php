@@ -10,14 +10,14 @@ class Seminar extends Model
     use HasFactory;
     protected $table = 'seminars';
     protected $primaryKey = 'id';
-    protected $fillable = ['period', 'date','subject_id','room_id', 'academic_id', 'student_group_id'];
+    protected $fillable = ['period', 'date','subject_id','room_id', 'academic_id', 'group_id'];
 
     public function room(){
         return $this->belongsTo(Room::class);
     }
 
-    public function student_group(){
-        return $this->belongsTo(StudentGroup::class);
+    public function group(){
+        return $this->belongsTo(Group::class);
     }
 
     public function academic(){

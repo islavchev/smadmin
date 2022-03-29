@@ -18,7 +18,7 @@ class CreateSeminarsTable extends Migration
             $table->tinyInteger('period');
             $table->date('date');
             $table->foreignId('subject_id');
-            $table->foreignId('student_group_id')->nullable()->constrained();
+            $table->foreignId('group_id')->nullable()->constrained();
             $table->foreignId('room_id')->nullable()->constrained();
             $table->foreignId('academic_id')->nullable()->constrained();
             $table->timestamps();

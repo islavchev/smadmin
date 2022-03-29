@@ -25,7 +25,7 @@ class IndexController extends Controller
             $seminars = 0;
         }
 
-        // dd($seminars[1]->student_group);
+        // dd($seminars[1]->group);
 
         return view('welcome', ['seminars'=>$seminars, 'today'=>$today, 'week_array'=>$week_array, 'weekday_array'=>$weekday_array]); 
     }
@@ -48,7 +48,7 @@ class IndexController extends Controller
         $seminars = Seminar::whereRaw('YEAR(date) = '.$request->year.' AND MONTH(date) '.$semester)->orderBy('date')->get();
 
         $grouped = $seminars->groupBy(function ($item){
-            return DateTime::createFromFormat('Y-m-d', $item->date)->format('w').$item->period.$item->subject_id.$item->student_group_id.$item->academic_id.$item->room_id;
+            return DateTime::createFromFormat('Y-m-d', $item->date)->format('w').$item->period.$item->subject_id.$item->group_id.$item->academic_id.$item->room_id;
         });
 
         $grouped_iteration=0;
@@ -79,7 +79,7 @@ class IndexController extends Controller
                         $conflicts[] = ['date' => $single_check->first()->date, 'period' => $single_check->first()->period];
                     }
                 }
-                $conflict_check = $cases->groupBy('student_group_id');
+                $conflict_check = $cases->groupBy('group_id');
                 foreach ($conflict_check as $single_check) {
                     if ($single_check->count() > 1 ) {
                         $conflicts[] = ['date' => $single_check->first()->date, 'period' => $single_check->first()->period];

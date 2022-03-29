@@ -33,11 +33,11 @@
             </div>
         </div>
         <div class="row mt-2">
-            <div class="col-md-2"><label for="student_group_id"><strong>Група:</strong></label></div>
+            <div class="col-md-2"><label for="group_id"><strong>Група:</strong></label></div>
             <div class="col-md-10">
-                <select name="student_group_id" id="student_group_id" class="form-select form-select-sm">
-                    @foreach ($student_groups as $group)
-                        <option value="{{$group->id}}" {{$group->id == $seminar->student_group->id ? 'selected':''}}>
+                <select name="group_id" id="group_id" class="form-select form-select-sm">
+                    @foreach ($groups as $group)
+                        <option value="{{$group->id}}" {{$group->id == $seminar->group->id ? 'selected':''}}>
                             {{$group->name}}
                         </option>
                     @endforeach

@@ -47,8 +47,8 @@
                                 @endisset
                             </div>
                             <div class="col-4 p-0 offset-4 offset-md-0">
-                                @isset($seminars->find($seminar_info['seminar_id'])->student_group)
-                                {{$seminars->find($seminar_info['seminar_id'])->student_group['name']}}
+                                @isset($seminars->find($seminar_info['seminar_id'])->group)
+                                {{$seminars->find($seminar_info['seminar_id'])->group['name']}}
                                 @else
                                 N/A        
                                 @endisset

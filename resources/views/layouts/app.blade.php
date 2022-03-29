@@ -68,7 +68,7 @@
                             <a class="nav-link dropdown-toggle" id="editNavbar" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Редакция</a>
                             <ul class="dropdown-menu" aria-labelledby="editNavbar">
                                 <li><a href="{{route('rooms.index')}}" class="dropdown-item">Зали</a></li>
-                                <li><a href="{{route('student_groups.index')}}" class="dropdown-item">Групи</a></li>
+                                <li><a href="{{route('groups.index')}}" class="dropdown-item">Групи</a></li>
                                 <li><a href="{{route('subjects.index')}}" class="dropdown-item">Дисциплини</a></li>
                                 <li><a href="{{route('academics.index')}}" class="dropdown-item">Преподаватели</a></li>
                             </ul>

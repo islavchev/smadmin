@@ -22,7 +22,7 @@
                             {{$seminar->academic->first_name.' '.$seminar->academic->last_name}}
                         </div>
                         <div class="col-md-1">
-                            {{$seminar->student_group->name}}
+                            {{$seminar->group->name}}
                         </div>
                         <div class="col-md-1">
                             {{$seminar->room->room_name}}

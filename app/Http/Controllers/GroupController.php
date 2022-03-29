@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreStudentGroupRequest;
-use App\Http\Requests\UpdateStudentGroupRequest;
-use App\Models\StudentGroup;
+use App\Http\Requests\StoreGroupRequest;
+use App\Http\Requests\UpdateGroupRequest;
+use App\Models\Group;
 
-class StudentGroupController extends Controller
+class GroupController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +16,9 @@ class StudentGroupController extends Controller
     public function index()
     {
         //
-        $groups = StudentGroup::orderBy('id')->paginate(15);
+        $groups = Group::orderBy('id')->paginate(15);
         //
-        return view('student_groups.index', ['student_groups'=>$groups]); 
+        return view('groups.index', ['groups'=>$groups]); 
     }
 
     /**
@@ -29,16 +29,16 @@ class StudentGroupController extends Controller
     public function create()
     {
         //
-        return view('student_groups.create');
+        return view('groups.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreStudentGroupRequest  $request
+     * @param  \App\Http\Requests\StoreGroupRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreStudentGroupRequest $request)
+    public function store(StoreGroupRequest $request)
     {
         //
         
@@ -48,21 +48,21 @@ class StudentGroupController extends Controller
 
         $names = array_values(array_filter(explode("\n", str_replace("\r", "", $request->input('names')))));
         foreach ($names as $name) {
-            $room = StudentGroup::create([
+            $room = Group::create([
                 'name' => $name                
             ]);
         };
 
-        return redirect('student_groups');
+        return redirect('groups');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\StudentGroup  $studentGroup
+     * @param  \App\Models\Group  $Group
      * @return \Illuminate\Http\Response
      */
-    public function show(StudentGroup $studentGroup)
+    public function show(Group $Group)
     {
         //
     }
@@ -70,10 +70,10 @@ class StudentGroupController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\StudentGroup  $studentGroup
+     * @param  \App\Models\Group  $Group
      * @return \Illuminate\Http\Response
      */
-    public function edit(StudentGroup $studentGroup)
+    public function edit(Group $Group)
     {
         //
     }
@@ -81,11 +81,11 @@ class StudentGroupController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateStudentGroupRequest  $request
-     * @param  \App\Models\StudentGroup  $studentGroup
+     * @param  \App\Http\Requests\UpdateGroupRequest  $request
+     * @param  \App\Models\Group  $Group
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateStudentGroupRequest $request, StudentGroup $studentGroup)
+    public function update(UpdateGroupRequest $request, Group $Group)
     {
         //
     }
@@ -93,10 +93,10 @@ class StudentGroupController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\StudentGroup  $studentGroup
+     * @param  \App\Models\Group  $Group
      * @return \Illuminate\Http\Response
      */
-    public function destroy(StudentGroup $studentGroup)
+    public function destroy(Group $Group)
     {
         //
     }

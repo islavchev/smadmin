@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\AcademicController;
 use App\Http\Controllers\IndexController;
-use App\Http\Controllers\StudentGroupController;
+use App\Http\Controllers\GroupController;
 use App\Http\Controllers\SeminarController;
 use App\Http\Controllers\SubjectController;
 
@@ -34,7 +34,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('rooms', RoomController::class);
-Route::resource('student_groups', StudentGroupController::class);
+Route::resource('groups', GroupController::class);
 Route::resource('academics', AcademicController::class);
 Route::resource('seminars', SeminarController::class);
 Route::resource('subjects', SubjectController::class);
