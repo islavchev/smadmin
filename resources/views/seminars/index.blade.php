@@ -16,17 +16,14 @@
     </div>
         @if ($seminars->count())
             <div class="row align-items-center">
-                <div class="col-md-2 col-lg-1 border text-start d-none d-md-block">
-                    <strong>Дата</strong>
-                </div>
-                <div class="col-md-2 border border-start-0 text-start d-none d-md-block">
-                    <strong>Час</strong>
+                <div class="col-md-3 col-lg-2 border text-start d-none d-md-block">
+                    <strong>Дата и час</strong>
                 </div>
                 <div class="col-md-2 col-lg-1 text-start border border-start-0 d-none d-md-block">
                     <strong>Група</strong>
                 </div>
                 <div class="col-md border border-start-0 text-start d-none d-md-block">
-                    <strong>Име</strong>
+                    <strong>Дисциплина</strong>
                 </div>
                 <div class="col-md-2 border border-start-0 text-start d-none d-md-block">
                     <strong>Преподавател</strong>
@@ -42,34 +39,28 @@
         @endif
         @foreach ($seminars as $seminar)
             <div class="row">
-                <div class="col-6 border border-end-0 text-end d-block d-md-none">
-                    <strong>Дата</strong>
+                <div class="col-5 border border-end-0 text-end d-block d-md-none" >
+                    <strong>Дата и час</strong>
                 </div>
-                <div class="col-6 col-md-2 col-lg-1 border border-top-0 text-start">
-                    {{DateTime::createFromFormat('Y-m-d', $seminar->date)->format('d.m.y')}}
-                </div> 
-                <div class="col-6 border border-top-0 text-end d-block d-md-none">
-                    <strong>Час</strong>
-                </div>
-                <div class="col-6 col-md-2 border-end border-bottom text-start">
-                    {{config('enums.class_periods')[$seminar->period]}}
+                <div class="col-7 col-md-2 col-lg-2 border border-top-0 text-start" >
+                    {{config('enums.weekdays')[DateTime::createFromFormat('Y-m-d', $seminar->date)->format('w')].' '.DateTime::createFromFormat('Y-m-d', $seminar->date)->format('d.m.y').' / '.config('enums.class_periods')[$seminar->period]}}
                 </div>    
-                <div class="col-6 text-end border border-start-0 d-block d-md-none">
+                <div class="col-5 text-end border border-start-0 d-block d-md-none">
                     <strong>Група</strong>
                 </div>     
-                <div class="col-6 col-md-2 col-lg-1 border-end border-bottom text-start">
+                <div class="col-7 col-md-2 col-lg-1 border-end border-bottom text-start">
                     {{$seminar->group->name}} 
                 </div>    
-                <div class="col-6 border border-start-0 text-end d-block d-md-none">
+                <div class="col-5 border border-start-0 text-end d-block d-md-none">
                     <strong>Име</strong>
                 </div>     
-                <div class="col-6 col-md border-end border-bottom text-start">
+                <div class="col-7 col-md border-end border-bottom text-start">
                         {{$seminar->subject->name}} 
                 </div>   
-                <div class="col-6 border border-start-0 text-end d-block d-md-none">
+                <div class="col-5 border border-start-0 text-end d-block d-md-none">
                     <strong>Преподавател</strong>
                 </div>
-                <div class="col-6 col-md-2 border-end border-bottom text-start"> 
+                <div class="col-7 col-md-2 border-end border-bottom text-start"> 
                     @isset($seminar->academic)
                     {{config('enums.acad_positions')[$seminar->academic->acad_position].' '.$seminar->academic->last_name}} 
                     @else
@@ -78,10 +69,10 @@
                 </div>
                 {{-- <div class="col-1 {{isset(Auth::user()->id) ? 'border-start' : ''}}"> --}}
                     {{-- @if (isset(Auth::user()->id)) --}}
-                <div class="col-6 text-end border border-start-0 d-block d-md-none">
+                <div class="col-5 text-end border border-start-0 d-block d-md-none">
                     <strong> Редакция</strong>
                     </div>
-                    <div class="col-6 col-md-2 col-lg-1 border-end border-bottom">
+                    <div class="col-7 col-md-2 col-lg-1 border-end border-bottom">
                         <div class="row align-items-end p-0">
                             <div class="col text-end p-0">
                             <a 
