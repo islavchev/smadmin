@@ -2,6 +2,8 @@
 @section('content')
 <div class="container">
     <div class="row p-2 p-md-0">
+
+        {{-- Looping first column with period labels --}}
         <div class="col-lg-1 col-md-3 col-sm-6 mt-3 border border-secondary h-auto" style="background-color:lightgray">
             <div class="row text-center"><strong>Period</strong></div>
             @foreach ( config('enums.class_periods') as $key => $class_period)
@@ -15,9 +17,11 @@
                 </div>
             @endforeach
         </div>
+
+        {{-- Looping through the weekdays --}}
         @foreach (config('enums.weekdays') as $num_weekday => $weekday)
-        @if ($loop->first==false)
-        <div class="col-lg col-md-3 col-sm-6 mt-3 border border-start-0 border-secondary {{$loop->iteration == 5 ? 'border-md-start' : ''}} " style="{{ $loop->odd ? "background-color:lightgray;":"" }}">
+        @if ($loop->first==false && $num_weekday != 6)
+        <div class="col-lg col-md-3 col-sm-6 mt-3 border border-start-0 border-secondary" style="{{ $loop->odd ? "background-color:lightgray;":"" }}">
             <div class="row text-center" style="background-color: lightgray"><strong>{{$weekday}}</strong></div>
             @foreach ( config('enums.class_periods') as $key => $class_period)
                 <div class="row border-top border-secondary justify-content-center text-center Row{{$loop -> iteration}}">
@@ -71,10 +75,16 @@
             @endforeach
         </div>
         @endif
-        @if ($loop->last)
+        @endforeach    
+
+        {{-- Add saturday and sunday if there are classes --}}
+        @php
+            $weekend_days = [6, 0];
+        @endphp
+        @foreach ($weekend_days as $weekend)
             <div class="col-lg col-md-3 col-sm-6 mt-3 border border-start-0 border-secondary">
-                <div class="row text-center" style="background-color: lightgray">               
-                    <strong>{{config('enums.weekdays')[0]}}<strong>
+                <div class="row text-center" style="{{ $loop->even ? "background-color: #fdf5e6 ;":"background-color: #ffe4e1;" }}>               
+                    <strong>{{config('enums.weekdays')[$weekend]}}</strong>
                 </div>
                 @foreach ( config('enums.class_periods') as $key => $class_period)
                     <div class="row border-top border-secondary justify-content-center text-center Row{{$key}}">
@@ -87,8 +97,8 @@
                         @endphp
                         <div class="col">
                             
-                        @isset($schedule[0][$key])
-                        @foreach ($schedule[0][$key] as $seminar_info)
+                        @isset($schedule[$weekend][$key])
+                        @foreach ($schedule[$weekend][$key] as $seminar_info)
                         <div class="row {{$seminars_count>0 ? 'border-top':''}}" style="font-size:0.6rem">
                             <div class="col-4 col-md-8 p-0">{{$seminar_info['start_time'].'-'.$seminar_info['end_time']}}</div>
                             <div class="col-4 p-0">
@@ -128,9 +138,8 @@
                         </div>
                     </div>
                 @endforeach
-            </div>
-        @endif   
-        @endforeach        
+            </div> 
+        @endforeach   
     </div>
 </div>
 
