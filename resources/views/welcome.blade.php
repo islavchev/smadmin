@@ -32,7 +32,10 @@
                 </div>
             @endforeach
         </div>
+        {{-- {{dd($week_array)}} --}}
+
         @foreach ($week_array as $weekday)
+        @if ($loop->iteration < 6)            
         <div class="col-lg col-md-3 col-sm-6 mt-3 border border-start-0 border-secondary" style="{{ $loop->even ? "background-color:lightgray;":"" }} {{$weekday==$today ? "background-color:lightblue" : "" }}">
             <div class="row text-center" style="background-color: lightgray"><strong>{{date('d.m.y', DateTime::createFromFormat('Y-m-d',$weekday)->getTimestamp()).' ('.config('enums.weekdays')[$weekday_array[$loop->iteration-1]].')'}}</strong></div>
             @foreach ( config('enums.class_periods') as $key => $class_period)
@@ -77,6 +80,56 @@
                 </div>
             @endforeach
         </div>
+
+        @else
+            @if ($loop->iteration > 5)
+            <div class="col-lg col-md-3 col-sm-6 mt-3 border border-start-0 border-secondary" style="{{ $loop->even ? "background-color: #fdf5e6 ;":"background-color: #ffe4e1;" }} {{$weekday==$today ? "background-color:lightblue" : "" }}">
+                <div class="row text-center" style="background-color: lightgray"><strong>{{date('d.m.y', DateTime::createFromFormat('Y-m-d',$weekday)->getTimestamp()).' ('.config('enums.weekdays')[$weekday_array[$loop->iteration-1]].')'}}</strong></div>
+                @foreach ( config('enums.class_periods') as $key => $class_period)
+                    <div class="row border-top border-secondary justify-content-center text-center Row{{$loop -> iteration}}">
+                        <div class="col-1 d-block d-md-none">
+                            {{$loop->iteration}}
+                        </div>
+                        @php
+                            $period = $loop->iteration;
+                            $seminars_count = 0;
+                        @endphp
+                        <div class="col">
+                            @if ($seminars)
+                                @foreach ($seminars->sortBy('period')->sortBy('date') as $seminar)
+                                @if ($seminar->date == $weekday && $seminar->period == $period)
+                                    <div class="row {{$seminars_count>0 ? 'border-top':''}}" style="font-size:0.7rem">
+                                        <div class="col py-0 ps-1 pe-0">{{$seminar->subject->code}}</div>
+                                        <div class="col py-0 px-1">
+                                            @isset($seminar->academic)
+                                            <a href="{{route('academics.show',$seminar->academic)}}" class="link-success">{{$seminar->academic->abbreviation}}</a>
+                                            @else
+                                                N/A
+                                            @endisset
+                                        </div> 
+                                        <div class="col p-0">
+                                            @isset($seminar->room)
+                                                <a href="{{route('rooms.show', $seminar->room)}}" class="link-success">{{$seminar->room->room_name}}</a>
+                                            @else
+                                                N/A
+                                            @endisset
+                                        </div> 
+                                            
+                                        <div class="col p-0">{{$seminar->group->name}}</div>
+                                    </div>
+                                    @php
+                                        $seminars_count++;
+                                    @endphp
+                                @endif
+                                @endforeach
+                            @endif               
+                        </div>
+                    </div>
+                @endforeach
+            </div>      
+            @endif 
+        @endif
+
         @endforeach        
     </div>
 </div>
