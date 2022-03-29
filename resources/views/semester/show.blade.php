@@ -82,8 +82,8 @@
             $weekend_days = [6, 0];
         @endphp
         @foreach ($weekend_days as $weekend)
-            <div class="col-lg col-md-3 col-sm-6 mt-3 border border-start-0 border-secondary">
-                <div class="row text-center" style="{{ $loop->even ? "background-color: #fdf5e6 ;":"background-color: #ffe4e1;" }}>               
+            <div class="col-lg col-md-3 col-sm-6 mt-3 border border-start-0 border-secondary" style="{{ $loop->even ? "background-color: #fdf5e6 ;":"background-color: #ffe4e1;" }}">
+                <div class="row text-center" style="background-color: lightgray">               
                     <strong>{{config('enums.weekdays')[$weekend]}}</strong>
                 </div>
                 @foreach ( config('enums.class_periods') as $key => $class_period)
