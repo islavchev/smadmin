@@ -78,68 +78,74 @@
         @endforeach    
 
         {{-- Add saturday and sunday if there are classes --}}
-        @php
-            $weekend_days = [6, 0];
+        @php    
+            if (isset($schedule[0])) {
+                $weekend_days = [6, 0];
+            } elseif (isset($shedule[6])) {
+                $weekend_days = [6];
+            }
         @endphp
-        @foreach ($weekend_days as $weekend)
-            <div class="col-lg col-md-3 col-sm-6 mt-3 border border-start-0 border-secondary" style="{{ $loop->even ? "background-color: #fdf5e6 ;":"background-color: #ffe4e1;" }}">
-                <div class="row text-center" style="background-color: lightgray">               
-                    <strong>{{config('enums.weekdays')[$weekend]}}</strong>
-                </div>
-                @foreach ( config('enums.class_periods') as $key => $class_period)
-                    <div class="row border-top border-secondary justify-content-center text-center Row{{$key}}">
-                        <div class="col-1 d-block d-md-none">
-                            {{$loop->iteration}}
-                        </div>
-                        @php
-                            $period = $loop->iteration;
-                            $seminars_count = 0;
-                        @endphp
-                        <div class="col">
-                            
-                        @isset($schedule[$weekend][$key])
-                        @foreach ($schedule[$weekend][$key] as $seminar_info)
-                        <div class="row {{$seminars_count>0 ? 'border-top':''}}" style="font-size:0.6rem">
-                            <div class="col-4 col-md-8 p-0">{{$seminar_info['start_time'].'-'.$seminar_info['end_time']}}</div>
-                            <div class="col-4 p-0">
-                                @isset($seminars->find($seminar_info['seminar_id'])->subject)
-                                {{$seminars->find($seminar_info['seminar_id'])->subject['code']}}
-                                @else
-                                N/A        
-                                @endisset
-                            </div>
-                            <div class="col-4 p-0">
-                                @isset($seminars->find($seminar_info['seminar_id'])->academic)
-                                {{$seminars->find($seminar_info['seminar_id'])->academic['abbreviation']}}
-                                @else
-                                N/A        
-                                @endisset
-                            </div>
-                            <div class="col-4 p-0 offset-4 offset-md-0">
-                                @isset($seminars->find($seminar_info['seminar_id'])->group)
-                                {{$seminars->find($seminar_info['seminar_id'])->group['name']}}
-                                @else
-                                N/A        
-                                @endisset
-                            </div>
-                            <div class="col-4 p-0">
-                                @isset($seminars->find($seminar_info['seminar_id'])->room)
-                                {{$seminars->find($seminar_info['seminar_id'])->room['room_name']}}
-                                @else
-                                N/A        
-                                @endisset
-                            </div>
-                        </div>  
-                        @php
-                            $seminars_count++;
-                        @endphp                          
-                        @endforeach
-                        @endisset
-                        </div>
+        @isset($weekend_days)            
+            @foreach ($weekend_days as $weekend)      
+                <div class="col-lg col-md-3 col-sm-6 mt-3 border border-start-0 border-secondary" style="{{ $loop->even ? "background-color: #ffe4e1":"background-color: #fdf5e6" }}">
+                    <div class="row text-center" style="background-color: lightgray">               
+                        <strong>{{config('enums.weekdays')[$weekend]}}</strong>
                     </div>
-                @endforeach
-            </div> 
-        @endforeach   
+                    @foreach ( config('enums.class_periods') as $key => $class_period)
+                        <div class="row border-top border-secondary justify-content-center text-center Row{{$key}}">
+                            <div class="col-1 d-block d-md-none">
+                                {{$loop->iteration}}
+                            </div>
+                            @php
+                                $period = $loop->iteration;
+                                $seminars_count = 0;
+                            @endphp
+                            <div class="col">
+                                
+                            @isset($schedule[$weekend][$key])
+                            @foreach ($schedule[$weekend][$key] as $seminar_info)
+                            <div class="row {{$seminars_count>0 ? 'border-top':''}}" style="font-size:0.6rem">
+                                <div class="col-4 col-md-8 p-0">{{$seminar_info['start_time'].'-'.$seminar_info['end_time']}}</div>
+                                <div class="col-4 p-0">
+                                    @isset($seminars->find($seminar_info['seminar_id'])->subject)
+                                    {{$seminars->find($seminar_info['seminar_id'])->subject['code']}}
+                                    @else
+                                    N/A        
+                                    @endisset
+                                </div>
+                                <div class="col-4 p-0">
+                                    @isset($seminars->find($seminar_info['seminar_id'])->academic)
+                                    {{$seminars->find($seminar_info['seminar_id'])->academic['abbreviation']}}
+                                    @else
+                                    N/A        
+                                    @endisset
+                                </div>
+                                <div class="col-4 p-0 offset-4 offset-md-0">
+                                    @isset($seminars->find($seminar_info['seminar_id'])->group)
+                                    {{$seminars->find($seminar_info['seminar_id'])->group['name']}}
+                                    @else
+                                    N/A        
+                                    @endisset
+                                </div>
+                                <div class="col-4 p-0">
+                                    @isset($seminars->find($seminar_info['seminar_id'])->room)
+                                    {{$seminars->find($seminar_info['seminar_id'])->room['room_name']}}
+                                    @else
+                                    N/A        
+                                    @endisset
+                                </div>
+                            </div>  
+                            @php
+                                $seminars_count++;
+                            @endphp                          
+                            @endforeach
+                            @endisset
+                            </div>
+                        </div>
+                    @endforeach
+                </div>                 
+            @endforeach   
+        @endisset
     </div>
 </div>
 
