@@ -23,6 +23,16 @@
             </select></div>
         </div>
         <div class="row mt-2">
+            <div class="col-md-2"><label for="room_id"><strong>Зала:</strong></label></div>
+            <div class="col-md-10">
+                <select name="room_id" id="room_id" class="form-select form-select-sm">
+                    @foreach ($rooms as $room)
+                        <option value="{{$room->id}}" {{$room->id == $seminar->room->id ? 'selected':''}}>{{$room->room_name}}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+        <div class="row mt-2">
             <div class="col-md-2"><label for="subject_id"><strong>Дисциплина:</strong></label></div>
             <div class="col-md-10">
                 <select name="subject_id" id="subject_id" class="form-select form-select-sm">
