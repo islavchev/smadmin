@@ -86,7 +86,45 @@
                             $seminars_count = 0;
                         @endphp
                         <div class="col">
-                            {{-- code for sunday --}}
+                            
+                        @isset($schedule[0][$key])
+                        @foreach ($schedule[0][$key] as $seminar_info)
+                        <div class="row {{$seminars_count>0 ? 'border-top':''}}" style="font-size:0.6rem">
+                            <div class="col-4 col-md-8 p-0">{{$seminar_info['start_time'].'-'.$seminar_info['end_time']}}</div>
+                            <div class="col-4 p-0">
+                                @isset($seminars->find($seminar_info['seminar_id'])->subject)
+                                {{$seminars->find($seminar_info['seminar_id'])->subject['code']}}
+                                @else
+                                N/A        
+                                @endisset
+                            </div>
+                            <div class="col-4 p-0">
+                                @isset($seminars->find($seminar_info['seminar_id'])->academic)
+                                {{$seminars->find($seminar_info['seminar_id'])->academic['abbreviation']}}
+                                @else
+                                N/A        
+                                @endisset
+                            </div>
+                            <div class="col-4 p-0 offset-4 offset-md-0">
+                                @isset($seminars->find($seminar_info['seminar_id'])->group)
+                                {{$seminars->find($seminar_info['seminar_id'])->group['name']}}
+                                @else
+                                N/A        
+                                @endisset
+                            </div>
+                            <div class="col-4 p-0">
+                                @isset($seminars->find($seminar_info['seminar_id'])->room)
+                                {{$seminars->find($seminar_info['seminar_id'])->room['room_name']}}
+                                @else
+                                N/A        
+                                @endisset
+                            </div>
+                        </div>  
+                        @php
+                            $seminars_count++;
+                        @endphp                          
+                        @endforeach
+                        @endisset
                         </div>
                     </div>
                 @endforeach
