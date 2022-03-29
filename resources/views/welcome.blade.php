@@ -39,7 +39,7 @@
             @foreach ( config('enums.class_periods') as $key => $class_period)
                 <div class="row border-top border-secondary justify-content-center text-center Row{{$loop -> iteration}}">
                     <div class="col-1 d-block d-md-none">
-                        {{$loop->iteration}}
+                        {{$loop->iteration}} 
                     </div>
                     @php
                         $period = $loop->iteration;
@@ -80,7 +80,7 @@
         </div>
 
         @else
-            @if ($loop->iteration > 5)
+            @if ($seminars->where('date', '=', date('Y-m-d', strtotime($weekday .' +1 day')))->count()>0 || $seminars->where('date', '=', $weekday)->count() > 0 && $loop->iteration > 5)
             <div class="col-lg col-md-3 col-sm-6 mt-3 border border-start-0 border-secondary" style="{{ $loop->even ? "background-color: #fdf5e6 ;":"background-color: #ffe4e1;" }} {{$weekday==$today ? "background-color:lightblue" : "" }}">
                 <div class="row text-center" style="background-color: lightgray"><strong>{{date('d.m.y', DateTime::createFromFormat('Y-m-d',$weekday)->getTimestamp()).' ('.config('enums.weekdays')[$weekday_array[$loop->iteration-1]].')'}}</strong></div>
                 @foreach ( config('enums.class_periods') as $key => $class_period)
