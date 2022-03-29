@@ -32,8 +32,6 @@
                 </div>
             @endforeach
         </div>
-        {{-- {{dd($week_array)}} --}}
-
         @foreach ($week_array as $weekday)
         @if ($loop->iteration < 6)            
         <div class="col-lg col-md-3 col-sm-6 mt-3 border border-start-0 border-secondary" style="{{ $loop->even ? "background-color:lightgray;":"" }} {{$weekday==$today ? "background-color:lightblue" : "" }}">
