@@ -17,7 +17,7 @@
         <div class="d-flex flex-row flex-wrap">
         @foreach ($groups as $group)
             <div class="col-sm-2 d-flex border ps-2 pt-1 align-items-center">
-                    {{ $group->name }}
+                  <a href="{{route('groups.show', $group->id)}}"> {{ $group->name }} </a> 
 
 {{--            <div class="">
                 <p class="">

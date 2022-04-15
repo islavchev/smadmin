@@ -32,13 +32,37 @@
                 </div>
             @endforeach
         </div>
-        @foreach ($week_array as $weekday)
-        @if ($loop->iteration < 6)            
+        @foreach ($week_array as $daynumber => $weekday)
+        @if ($loop->iteration < 6)    
         <div class="col-lg col-md-3 col-sm-6 mt-3 border border-start-0 border-secondary" style="{{ $loop->even ? "background-color:lightgray;":"" }} {{$weekday==$today ? "background-color:lightblue" : "" }}">
-            <div class="row text-center" style="background-color: lightgray"><strong>{{date('d.m.y', DateTime::createFromFormat('Y-m-d',$weekday)->getTimestamp()).' ('.config('enums.weekdays')[$weekday_array[$loop->iteration-1]].')'}}</strong></div>
+            <div class="row text-center" style="background-color: lightgray">
+                @if ($daynumber === 3)
+                <div class="col-1 d-none d-md-block d-lg-none border-start border-secondary">
+                </div>                        
+                @endif
+                @if ($daynumber % 2 != 0)
+                <div class="col-1 d-none d-sm-block d-md-none border-start border-secondary">
+                </div>                        
+                @endif
+                <div class="col-1 d-block d-sm-none border-start border-secondary">
+                </div>
+                <div class="col">
+                    <strong>{{date('d.m.y', DateTime::createFromFormat('Y-m-d',$weekday)->getTimestamp()).' ('.config('enums.weekdays')[$weekday_array[$loop->iteration-1]].')'}}</strong>
+                </div>
+            </div>
             @foreach ( config('enums.class_periods') as $key => $class_period)
                 <div class="row border-top border-secondary justify-content-center text-center Row{{$loop -> iteration}}">
-                    <div class="col-1 d-block d-md-none">
+                    @if ($daynumber === 3)
+                    <div class="col-1 d-none d-md-block d-lg-none border-start border-secondary">
+                        {{$loop->iteration}} 
+                    </div>                        
+                    @endif
+                    @if ($daynumber % 2 != 0)
+                    <div class="col-1 d-none d-sm-block d-md-none border-start border-secondary">
+                        {{$loop->iteration}} 
+                    </div>                        
+                    @endif
+                    <div class="col-1 d-block d-sm-none border-start border-secondary">
                         {{$loop->iteration}} 
                     </div>
                     @php
@@ -79,13 +103,30 @@
             @endforeach
         </div>
 
-        @else
+        @elseif ($seminars)
             @if ($seminars->where('date', '=', date('Y-m-d', strtotime($weekday .' +1 day')))->count()>0 || $seminars->where('date', '=', $weekday)->count() > 0 && $loop->iteration > 5)
             <div class="col-lg col-md-3 col-sm-6 mt-3 border border-start-0 border-secondary" style="{{ $loop->even ? "background-color: #fdf5e6 ;":"background-color: #ffe4e1;" }} {{$weekday==$today ? "background-color:lightblue" : "" }}">
-                <div class="row text-center" style="background-color: lightgray"><strong>{{date('d.m.y', DateTime::createFromFormat('Y-m-d',$weekday)->getTimestamp()).' ('.config('enums.weekdays')[$weekday_array[$loop->iteration-1]].')'}}</strong></div>
+                <div class="row text-center" style="background-color: lightgray">
+                    @if ($daynumber % 2 != 0)
+                        <div class="col-1 d-none d-sm-block d-md-none border-start border-secondary">
+                        </div>                        
+                    @endif
+                    <div class="col-1 d-block d-sm-none border-start border-secondary">
+                    </div>
+                    <div class="col">
+                        <strong>{{date('d.m.y', DateTime::createFromFormat('Y-m-d',$weekday)->getTimestamp()).' ('.config('enums.weekdays')[$weekday_array[$loop->iteration-1]].')'}}</strong>
+                    </div>
+                </div>
                 @foreach ( config('enums.class_periods') as $key => $class_period)
                     <div class="row border-top border-secondary justify-content-center text-center Row{{$loop -> iteration}}">
-                        <div class="col-1 d-block d-md-none">
+                        @if ($daynumber % 2 != 0)
+    
+                        <div class="col-1 d-none d-sm-block d-md-none border-start border-secondary">
+                            {{$loop->iteration}} 
+                        </div>
+                            
+                        @endif
+                        <div class="col-1 d-block d-sm-none border-start border-secondary">
                             {{$loop->iteration}}
                         </div>
                         @php

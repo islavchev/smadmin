@@ -71,6 +71,7 @@
                                 <li><a href="{{route('groups.index')}}" class="dropdown-item">Групи</a></li>
                                 <li><a href="{{route('subjects.index')}}" class="dropdown-item">Дисциплини</a></li>
                                 <li><a href="{{route('academics.index')}}" class="dropdown-item">Преподаватели</a></li>
+                                <li><a href="{{route('students.index')}}" class="dropdown-item">Студенти</a></li>
                             </ul>
                         </li>
                         <!-- Authentication Links -->

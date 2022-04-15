@@ -50,22 +50,6 @@
                     <label for="room_no">Кабинет &#8470;</label>
                     <input type="text" class="form-control form-control-sm" id="room_no" name="room_no" value="{{$academic->room_no}}" required>
                 </div>
-                <div class="form-group mb-3 col-md-4"> 
-                    <label for="phone">Телефон</label>
-                    <input 
-                        type="text"
-                        class="form-control form-control-sm"
-                        name="phone" id="phone"
-                        value="{{$academic->phone}}" required>
-                </div>
-            <div class="form-group mb-3 col-md-4"> 
-                <label for="email">Ел. поща</label>
-                <input 
-                    type="email"
-                    class="form-control form-control-sm"
-                    name="email" id="email"
-                    value="{{$academic->email}}" required>
-            </div>
         </div>
             <button type="submit" class="btn btn-success btn-sm mt-3">
                 Запиши

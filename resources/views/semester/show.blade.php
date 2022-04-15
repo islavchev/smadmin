@@ -22,10 +22,34 @@
         @foreach (config('enums.weekdays') as $num_weekday => $weekday)
         @if ($loop->first==false && $num_weekday != 6)
         <div class="col-lg col-md-3 col-sm-6 mt-3 border border-start-0 border-secondary" style="{{ $loop->odd ? "background-color:lightgray;":"" }}">
-            <div class="row text-center" style="background-color: lightgray"><strong>{{$weekday}}</strong></div>
+            <div class="row text-center" style="background-color: lightgray">
+                @if ($num_weekday === 4)
+                <div class="col-1 d-none d-md-block d-lg-none border-start border-secondary">
+                </div>                        
+                @endif
+                @if ($num_weekday % 2 == 0)
+                <div class="col-1 d-none d-sm-block d-md-none border-start border-secondary">
+                </div>                        
+                @endif
+                <div class="col-1 d-block d-sm-none border-start border-secondary">
+                </div>
+                <div class="col">
+                    <strong>{{$weekday}}</strong>
+                </div>
+            </div>
             @foreach ( config('enums.class_periods') as $key => $class_period)
                 <div class="row border-top border-secondary justify-content-center text-center Row{{$loop -> iteration}}">
-                    <div class="col-1 d-block d-md-none">
+                    @if ($num_weekday === 4)
+                    <div class="col-1 d-none d-md-block d-lg-none border-start border-secondary">
+                        {{$loop->iteration}} 
+                    </div>                        
+                    @endif
+                    @if ($num_weekday % 2 == 0)
+                    <div class="col-1 d-none d-sm-block d-md-none border-start border-secondary">
+                        {{$loop->iteration}} 
+                    </div>                        
+                    @endif
+                    <div class="col-1 d-block d-sm-none border-start border-secondary">
                         {{$loop->iteration}}
                     </div>
                     @php
@@ -88,12 +112,25 @@
         @isset($weekend_days)            
             @foreach ($weekend_days as $weekend)      
                 <div class="col-lg col-md-3 col-sm-6 mt-3 border border-start-0 border-secondary" style="{{ $loop->even ? "background-color: #ffe4e1":"background-color: #fdf5e6" }}">
-                    <div class="row text-center" style="background-color: lightgray">               
-                        <strong>{{config('enums.weekdays')[$weekend]}}</strong>
+                    <div class="row text-center" style="background-color: lightgray">
+                        @if ($weekend === 6)
+                            <div class="col-1 d-none d-sm-block d-md-none border-start border-secondary">
+                            </div>                        
+                        @endif
+                            <div class="col-1 d-block d-sm-none border-start border-secondary">
+                        </div>
+                        <div class="col">
+                            <strong>{{config('enums.weekdays')[$weekend]}}</strong>
+                        </div>               
                     </div>
                     @foreach ( config('enums.class_periods') as $key => $class_period)
                         <div class="row border-top border-secondary justify-content-center text-center Row{{$key}}">
-                            <div class="col-1 d-block d-md-none">
+                            @if ($weekend === 6)
+                                <div class="col-1 d-none d-sm-block d-md-none border-start border-secondary">
+                                    {{$loop->iteration}}
+                                </div>                        
+                            @endif
+                            <div class="col-1 d-block d-sm-none border-start border-secondary">
                                 {{$loop->iteration}}
                             </div>
                             @php

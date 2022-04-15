@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Group;
+use App\Models\Student;
 use App\Http\Requests\StoreGroupRequest;
 use App\Http\Requests\UpdateGroupRequest;
-use App\Models\Group;
 
 class GroupController extends Controller
 {
@@ -62,9 +63,10 @@ class GroupController extends Controller
      * @param  \App\Models\Group  $Group
      * @return \Illuminate\Http\Response
      */
-    public function show(Group $Group)
+    public function show(Group $group)
     {
         //
+        return view('groups.show')->with('group', $group);
     }
 
     /**
@@ -73,7 +75,7 @@ class GroupController extends Controller
      * @param  \App\Models\Group  $Group
      * @return \Illuminate\Http\Response
      */
-    public function edit(Group $Group)
+    public function edit(Group $group)
     {
         //
     }
@@ -85,7 +87,7 @@ class GroupController extends Controller
      * @param  \App\Models\Group  $Group
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateGroupRequest $request, Group $Group)
+    public function update(UpdateGroupRequest $request, Group $group)
     {
         //
     }
@@ -96,8 +98,28 @@ class GroupController extends Controller
      * @param  \App\Models\Group  $Group
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Group $Group)
+    public function destroy(Group $group)
     {
         //
+    }
+
+    public function detachStudent(Group $group,Student $student){
+       
+        $group->students()->detach($student->id);
+
+        return back()->with('group', $group);
+    }
+
+    public function attachStudents(Group $group, UpdateGroupRequest $request){
+       
+        // dd($group);
+        $group->students()->attach($request->studentIds);
+
+        return view('groups.show')->with('group', $group);
+    }
+
+    public function addStudents(Group $group){
+        $students = Student::get();
+        return view('groups.addStudents')->with(['group' => $group, 'students'=>$students]);
     }
 }
