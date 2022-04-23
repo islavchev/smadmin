@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Room;
+use App\Models\Seminar;
 use App\Http\Requests\StoreRoomRequest;
 use App\Http\Requests\UpdateRoomRequest;
-use App\Models\Room;
 
 class RoomController extends Controller
 {
@@ -110,6 +111,58 @@ class RoomController extends Controller
 
         return redirect('rooms');
     }
+
+    public function checkFreeRooms(UpdateRoomRequest $request)
+    {
+        //
+       
+        return view('rooms.check_free_rooms');
+    }
+
+    public function showFreeRooms(UpdateRoomRequest $request)
+    {
+        //
+       
+        $request->validate([
+            'date' => 'required',
+        ]);
+
+        // dd($request->date.' '.$request->period);
+
+        $rooms = Room::all();
+        $occupied_rooms = [];
+        $occupied_rooms_ids = [];
+        $free_rooms = [];
+        $seminars = Seminar::where('date', '=', $request->date)->get();
+        
+        if ($request->period != 0) {
+            $seminars = $seminars->where('period', '=', $request->period);
+            foreach ($seminars as $seminar) {
+                $occupied_rooms[] = $seminar->room;
+                $occupied_rooms_ids[] = $seminar->room->id;
+            }
+            $free_rooms = $rooms->except($occupied_rooms_ids);
+        } else {
+            for ($period=1; $period < 9; $period++) {
+                foreach ($seminars->where('period', '=', $period) as $seminar) {
+                    $occupied_rooms[$period][] = $seminar->room;                     
+                    $occupied_rooms_ids[$period][] = $seminar->room->id;
+                } 
+                if (isset($occupied_rooms_ids[$period])) {
+                    $free_rooms[$period] = $rooms->except($occupied_rooms_ids[$period]);
+                } else {
+                    $free_rooms[$period] = $rooms;
+                }
+            }    
+        }
+
+
+        // dd($occupied_rooms);
+        // dd($free_rooms);
+
+        return view('rooms.show_free_rooms', ['date' => $request->date, 'period'=>$request->period, 'seminars' => $seminars, 'free_rooms' => $free_rooms, 'occupied_rooms' => $occupied_rooms]);
+    }
+
 
     /**
      * Remove the specified resource from storage.

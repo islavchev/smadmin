@@ -37,6 +37,8 @@ Route::get('/check_conflicts', [IndexController::class, 'checkConflicts'])->name
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::resource('rooms', RoomController::class);
+Route::get('/check_free_rooms', [RoomController::class, 'checkFreeRooms'])->name('rooms.check_free_rooms');
+Route::put('/show_free_rooms', [RoomController::class, 'showFreeRooms'])->name('rooms.show_free_rooms');
 
 Route::resource('students', StudentController::class);
 Route::get('students/{student}/image', [StudentController::class, 'selectPhoto'])->name('students.select_photo');
@@ -57,5 +59,6 @@ Route::put('academics/{academic}/image', [AcademicController::class, 'uploadPhot
 Route::delete('academics/{academic}/image', [AcademicController::class, 'deletePhoto'])->name('academics.delete_photo');
 
 Route::resource('seminars', SeminarController::class);
+Route::post('seminars/multiple_delete', [SeminarController::class, 'multipleDelete'])->name('seminars.multiple_delete');
 
 Route::resource('subjects', SubjectController::class);

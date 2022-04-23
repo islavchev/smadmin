@@ -153,12 +153,16 @@ class SeminarController extends Controller
         return back();
     }
 
-    // public function destroyMultiple(Seminar $seminar)
-    // {
-    //     //
+    public function multipleDelete(UpdateSeminarRequest $request)
+    {
+        //
+        $request->validate([
+            'selected_seminars'=>'required',
+        ]);
+        // dd($request->selected_seminars);
 
-    //     $seminar -> delete();
+        Seminar::destroy($request->selected_seminars);
 
-    //     return redirect()->route('seminars.index');
-    // }
+        return redirect()->route('seminars.index');
+    }
 }

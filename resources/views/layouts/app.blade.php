@@ -54,11 +54,12 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-                        <a title="Добавете занимания" href="{{route('seminars.create')}}" class="btn btn-outline-success pb-0 me-1 my-1 my-md-0"><span class="material-icons">more_time</span></a>
-                        <a title="Списък на заниманията" href="{{route('seminars.index')}}" class="btn btn-outline-warning pb-0 me-1 my-1 my-md-0"><span class="material-icons">pending_actions</span></a>
-                        <a title="Седмично разписание за семестър" href="{{route('semester_choose')}}" class="btn btn-outline-primary pb-0 me-1 my-1 my-md-0"><span class="material-icons">calendar_month</span></a>
-                        <a title="Проверка за конфликти в разписанието" href="{{route('check_conflicts')}}" class="btn btn-outline-danger pb-0 me-1 my-1 my-md-0"><span class="material-icons">event_busy</span></a>
+                        <a title="Добавете занимания" href="{{route('seminars.create')}}" class="btn {{request()->is('seminars/create') ? 'btn-success': 'btn-outline-success'}} pb-0 me-1 my-1 my-md-0"><span class="material-icons">more_time</span></a>
+                        <a title="Списък на заниманията" href="{{route('seminars.index')}}" class="btn {{request()->is('seminars') ? 'btn-warning': 'btn-outline-warning'}} pb-0 me-1 my-1 my-md-0"><span class="material-icons">pending_actions</span></a>
+                        <a title="Седмично разписание за семестър" href="{{route('semester_choose')}}" class="btn {{request()->is('semester_choose')||request()->is('semester_show') ? 'btn-primary': 'btn-outline-primary'}} pb-0 me-1 my-1 my-md-0"><span class="material-icons">calendar_month</span></a>
+                        <a title="Проверка за конфликти в разписанието" href="{{route('check_conflicts')}}" class="btn {{request()->is('check_conflicts') ? 'btn-danger': 'btn-outline-danger'}} pb-0 me-1 my-1 my-md-0"><span class="material-icons">event_busy</span></a>
 
+                        <a title="Проверка за свободни зали" href="{{route('rooms.check_free_rooms')}}" class="btn {{request()->is('check_free_rooms')||request()->is('show_free_rooms') ? 'btn-success': 'btn-outline-success'}} pb-0 me-1 my-1 my-md-0"><span class="material-icons">door_front</span></a>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
